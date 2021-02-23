@@ -1,4 +1,3 @@
-
 package es.lojo.clickercompetition.demo.model;
 
 
@@ -7,8 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import model.City;
-import model.Team;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashSet;
@@ -45,11 +42,12 @@ public class Player {
     //Many to many -> Team
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "players") //tiene que tener mapped by del otro
-    Set<Team> teams = new HashSet<>();
+            Set<Team> teams = new HashSet<>();
 
 
     public Player() {}
 
+    //TODO: In player controller don't call constructor
     //img will be insert after crete
     public Player(String name, String surname, String password, int edad, int clicks, String mail){
         this.name =  StringManagement.capitalize(name);

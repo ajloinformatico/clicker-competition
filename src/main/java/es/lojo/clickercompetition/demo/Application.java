@@ -20,6 +20,7 @@ public class Application {
     //Permit all request
     @EnableWebSecurity
     @Configuration
+    static
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {

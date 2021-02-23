@@ -1,4 +1,3 @@
-
 package es.lojo.clickercompetition.demo.model;
 import es.lojo.clickercompetition.demo.model.Player;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -12,7 +11,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 /**
- * @author: Antoniojoselojoojeda
+ * @author Antoniojoselojoojeda
  * Team entity M : N With students.
  * A player can create a team and only this player can delete his team
  *
@@ -95,8 +94,4 @@ public class Team {
             player.getTeams().add(this);
         });
     }
-
-
-
-
 }

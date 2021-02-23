@@ -6,18 +6,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author antoniojoselojoojeda
- * Conutry model has 1:M -> AutonomusCommunity
- */
 @Entity
 @Data
 public class Country {
-    @Id @Getter @Setter
+    @Id
+    @Getter @Setter
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

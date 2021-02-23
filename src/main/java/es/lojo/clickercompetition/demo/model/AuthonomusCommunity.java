@@ -5,22 +5,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import es.lojo.clickercompetition.demo.model.Country;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author antoniojoselojoojeda
- * AutonomusCommunity model has M:1 -> City
- * AutonomusCommunity model has M:1 -> Country
- * annotations explained on Player model
- */
 @Entity
 @Data
 public class AuthonomusCommunity {
-    @Id @Getter @Setter
+    @Id
+    @Getter @Setter
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
@@ -36,12 +30,12 @@ public class AuthonomusCommunity {
     @JoinColumn()
     private Country country;
 
+
     //One to Much -> City
     @JsonBackReference
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "authonomusCommunity", cascade = CascadeType.ALL)
     Set<City> fromAutonomusCommunity = new HashSet<>();
-
 
     //Empty Constructor
     public AuthonomusCommunity() {}

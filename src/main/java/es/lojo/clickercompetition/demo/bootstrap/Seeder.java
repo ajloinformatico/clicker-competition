@@ -88,6 +88,8 @@ public class Seeder implements CommandLineRunner {
         Team clickRedTeam = teamRepo.save(new Team("Click red team"));
         Team clickeame = teamRepo.save(new Team("Clickeame"));
 
+
+        //TODO Does not add data to the relationship
         //add players to Teams
         reyesDelClick.addPlayersList(new ArrayList<Player>(Arrays.asList(juan, diego)));
         blueDragonClickMaster.addPlayer(elena);

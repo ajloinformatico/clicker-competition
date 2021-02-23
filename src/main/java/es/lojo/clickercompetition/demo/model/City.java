@@ -34,7 +34,7 @@ public class City {
     // One to Many -> Player
     @JsonBackReference
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "City", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     Set<Player> fromCity = new HashSet<>();
 
     public City() {}
