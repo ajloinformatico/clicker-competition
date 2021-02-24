@@ -37,21 +37,25 @@ public class City {
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     Set<Player> fromCity = new HashSet<>();
 
+    public void setCapitalizedName(){
+        this.name = StringManagement.capitalize(this.name);
+    }
+
     public City() {}
 
     public City(String name){
-        this.name = StringManagement.capitalize(name);
+        this.name = name;
     }
 
     public City(String name, AuthonomusCommunity authonomusCommunity){
-        this.name = StringManagement.capitalize(name);
+        this.name = name;
         this.authonomusCommunity = authonomusCommunity;
     }
 
 
     public City(Long id, String name, Long cliks){
         this.id = id;
-        this.name = StringManagement.capitalize(name);
+        this.name = name;
         this.clicks = cliks;
     }
 }

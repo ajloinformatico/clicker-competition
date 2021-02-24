@@ -60,6 +60,19 @@ public class PlayerController {
     }
 
     /**
+     * Return a player
+     * @param id {Long}: player id
+     * @return {ResponseEntity}
+     */
+    @GetMapping(value = "/player/{id}")
+    public ResponseEntity<Object> getOnePlayer(@PathVariable("id") Long id){
+        Optional<Player> player = playerRepo.findById(id);
+        if(player.isEmpty())
+            return new ResponseEntity<>("no found",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(player.get(), HttpStatus.OK);
+    }
+
+    /**
      * Add new player
      * It use capitalize by my own Library to save names
      * check if user exist
@@ -128,8 +141,9 @@ public class PlayerController {
         return new ResponseEntity<>("Player with id "+id+ " has been updated", HttpStatus.OK);
     }
 
+
     /**
-     * Set city
+     * Set city TODO: REFACTO LIKE CityController.updateCityAc
      * @param city {City}: city to add
      * @param id {Long}: id of user to update
      * @return ResponseEntity
@@ -137,7 +151,6 @@ public class PlayerController {
     @PutMapping(value = "player/city/{id}")
     public ResponseEntity<Object> updatePlayerCity(@RequestBody City city, @PathVariable("id") Long id){
         //Get Player
-        //TODO: REFACTOR
         Optional<Player> optionalPlayer = playerRepo.findById(id);
         if(optionalPlayer.isEmpty())
             throw new EntityNotFoundException(id.toString());
@@ -155,6 +168,11 @@ public class PlayerController {
         return new ResponseEntity<>(player.getName() + " updated with city " + city.getName(), HttpStatus.OK);
     }
 
+    /**
+     * Get a city of a player
+     * @param id
+     * @return
+     */
     @GetMapping(value = "player/city/{id}")
     public ResponseEntity<Object> getPlayerCity(@PathVariable("id") Long id){
         Player player = playerRepo.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
