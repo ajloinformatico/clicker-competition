@@ -2,7 +2,6 @@ package es.lojo.clickercompetition.demo.controllers;
 
 import es.lojo.clickercompetition.demo.model.AuthonomusCommunity;
 import es.lojo.clickercompetition.demo.model.City;
-import es.lojo.clickercompetition.demo.model.Player;
 import es.lojo.clickercompetition.demo.repository.AuthonomusCommunityRepository;
 import es.lojo.clickercompetition.demo.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
