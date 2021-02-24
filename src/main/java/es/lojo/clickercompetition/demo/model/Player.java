@@ -45,13 +45,43 @@ public class Player {
             Set<Team> teams = new HashSet<>();
 
 
-    public Player() {}
+    //Methods to Set encrypted password , capitalized name and default avatar
+    //they are only called in the sign in
+    /**
+     * Encrypt user pasword
+     */
+    public void setEncriptedPassword(){
+        this.password = new BCryptPasswordEncoder().encode(this.password);
+    }
 
-    //TODO: In player controller don't call constructor
+    /**
+     * Set usurname capitalized
+     */
+    public void setCapitalizedNames(){
+        this.name = StringManagement.capitalize(this.name);
+        this.surname = StringManagement.capitalize(this.surname);
+    }
+
+    /**
+     * Set user default avatar
+     */
+    public void setUserDefaultAvatar(){
+        this.avatar = "./images/default.png";
+    }
+
+
+
+
+
+    public Player() {
+
+    }
+
+
     //img will be insert after crete
     public Player(String name, String surname, String password, int edad, int clicks, String mail){
-        this.name =  StringManagement.capitalize(name);
-        this.surname = StringManagement.capitalize(surname);
+        this.name =  name;
+        this.surname = surname;
         this.password = new BCryptPasswordEncoder().encode(password);
         this.edad = edad;
         this.clicks = clicks;

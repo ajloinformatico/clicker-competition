@@ -122,11 +122,8 @@ public class PlayerController {
         playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
 
-
-        //TODO: Constructores
-        player.setName(StringManagement.capitalize(player.getName()));
-        player.setSurname(StringManagement.capitalize(player.getSurname()));
-        player.setPassword(new BCryptPasswordEncoder().encode(player.getPassword()));
+        player.setCapitalizedNames();
+        player.setEncriptedPassword();
         playerRepo.save(player);
         return new ResponseEntity<>("Player with id "+id+ " has been updated", HttpStatus.OK);
     }

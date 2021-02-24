@@ -18,6 +18,7 @@ public class PlayerUtilitiesService {
 
 
     /**
+     * This check is only done in login for what we was speaking!!
      * I have created a method in player because I repeat the same block in
      * two controllers addSimple addPlayerWithCity
      * @param player {Player} player to add
@@ -25,10 +26,9 @@ public class PlayerUtilitiesService {
      */
     public boolean addPlayerCheck(Player player) throws java.io.IOException{
         //TODO: ask why it doesn't call the constructor
-        player.setName(StringManagement.capitalize(player.getName()));
-        player.setSurname(StringManagement.capitalize(player.getSurname()));
-        player.setAvatar("./images/default.png");
-        player.setPassword(new BCryptPasswordEncoder().encode(player.getPassword()));
+        player.setCapitalizedNames(); //Set name and Surname capitalizes
+        player.setUserDefaultAvatar(); //Set avatar
+        player.setEncriptedPassword(); //Set password
 
         Optional<Player> oldPlayerByNames = playerRep.findPlayerByNameAndSurname(player.getName(), player.getSurname());
         Optional<Player> oldPlayerByMail = playerRep.findPlayerByMail(player.getMail());

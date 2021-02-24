@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
 
 @Component
 public class Seeder implements CommandLineRunner {
@@ -28,6 +30,7 @@ public class Seeder implements CommandLineRunner {
 
     @Autowired
     private TeamRepository teamRepo;
+
 
 
     //Execute on the run
@@ -95,6 +98,9 @@ public class Seeder implements CommandLineRunner {
         blueDragonClickMaster.addPlayer(elena);
         clickRedTeam.addPlayer(alex);
         clickeame.addPlayersList(new ArrayList<Player>(Arrays.asList(tim, atom)));
+
+        //List<Team> teamsList = new ArrayList<Team>(Arrays.asList(reyesDelClick, blueDragonClickMaster, clickRedTeam, clickeame));
+        teamRepo.saveAll(new ArrayList<Team>(Arrays.asList(reyesDelClick, blueDragonClickMaster, clickRedTeam, clickeame)));
     }
 }
 
