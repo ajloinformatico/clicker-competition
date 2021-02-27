@@ -5,12 +5,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  *
  * @author: antonio
  */
 public interface AuthonomusCommunityRepository extends CrudRepository<AuthonomusCommunity, Long> {
+
+
+    Optional<AuthonomusCommunity> findAuthonomusCommunityByName(String name);
 
     /**
      * SELECT au.id, au.name, pl.clicks FROM authonomus_community au

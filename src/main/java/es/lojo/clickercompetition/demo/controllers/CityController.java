@@ -47,10 +47,9 @@ public class CityController {
      */
     @GetMapping(value = "/city/{id}")
     public ResponseEntity<Object> getOnCity(@PathVariable("id") Long id){
-        Optional<City> optionalCity = cityRepo.findById(id);
-        if(optionalCity.isEmpty())
-            return new ResponseEntity<>("not found",HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(optionalCity.get(),HttpStatus.OK);
+        City city = cityRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id.toString()));
+        return new ResponseEntity<>(city,HttpStatus.OK);
     }
 
     /**
@@ -94,10 +93,17 @@ public class CityController {
      */
     @DeleteMapping(value = "/city/{id}")
     public ResponseEntity<Object> deleteCity(@PathVariable("id") Long id){
-        cityRepo.findById(id)
+
+        City city = cityRepo.findById(id)
                 .orElseThrow(()->new EntityNotFoundException(id.toString()));
-        cityRepo.deleteById(id);
-        return new ResponseEntity<>("City with id "+id+" has been deleted",HttpStatus.OK);
+        //check that there are no associated players
+        try{
+            cityRepo.delete(city);
+            return new ResponseEntity<>("City with id "+id+" has been deleted",HttpStatus.OK);
+        }catch(Exception ex){
+            //There are users associates to this city
+            return new ResponseEntity<>(city.getName() + " already has associated players ",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -108,33 +114,35 @@ public class CityController {
      */
     @PutMapping(value = "city/{id}")
     public ResponseEntity<Object> updateCity(@RequestBody City city, @PathVariable("id") Long id){
-        cityRepo.findById(id)
+        City oldCity = cityRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
-        city.setCapitalizedName();
-        cityRepo.save(city);
+        oldCity.setName(city.getName());
+        oldCity.setCapitalizedName();
+        cityRepo.save(oldCity);
         return new ResponseEntity<>("City with id "+id+" was has been updated", HttpStatus.OK);
     }
 
     /**
-     * Only update Authonomous Community of a city
-     * @param city {City}: City to update
-     * @param id {Long}: AutonomousCommunity id
+     * TODO: FIJARME EN updateCity
+     * because I just want to update the foreign one
+     * @param authonomusCommunity {AuthonomusCommunity}: Autonomous Community to add
+     * @param id {Long}:City to update id
      * @return {ResponseEntity}
      */
     @PutMapping(value = "city/AutonomousCommunity/{id}")
-    public ResponseEntity<Object> updateCityAc(@RequestBody City city, @PathVariable("id") Long id){
+    public ResponseEntity<Object> updateCityAc(@RequestBody AuthonomusCommunity authonomusCommunity, @PathVariable("id") Long id){
         //Check City
-        Optional<City> optionalCity = cityRepo.findById(city.getId());
-        if(optionalCity.isEmpty())
-            throw new EntityNotFoundException(id.toString());
-
-        //Check AC
-        Optional<AuthonomusCommunity> optionalAuthonomusCommunity = authonomusCommunityRep.findById(id);
+        City city = cityRepo.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
+        //Check Autonomous Community
+        Optional<AuthonomusCommunity> optionalAuthonomusCommunity = authonomusCommunityRep
+                .findAuthonomusCommunityByName(authonomusCommunity.getName());
         if(optionalAuthonomusCommunity.isEmpty())
-            throw new EntityNotFoundException(id.toString());
+            return new ResponseEntity<>(authonomusCommunity.getName() + "does not ecists", HttpStatus.NOT_FOUND);
+
         city.setAuthonomusCommunity(optionalAuthonomusCommunity.get());
-        return new ResponseEntity<>(city.getName() + "update wit AC "+
-                optionalAuthonomusCommunity.get().getName(), HttpStatus.OK);
+        cityRepo.save(city);
+        return new ResponseEntity<>(city.getName() + " update with Autonomous Community " +
+                authonomusCommunity.getName(),HttpStatus.OK);
     }
     //TODO: GET AUTHONOMOUS COMMUNITY FROM CITY
     //TODO: TEST CONTROLLERS

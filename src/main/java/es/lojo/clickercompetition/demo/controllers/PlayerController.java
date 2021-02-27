@@ -2,8 +2,10 @@ package es.lojo.clickercompetition.demo.controllers;
 
 import es.lojo.clickercompetition.demo.model.City;
 import es.lojo.clickercompetition.demo.model.Player;
+import es.lojo.clickercompetition.demo.model.Team;
 import es.lojo.clickercompetition.demo.repository.CityRepository;
 import es.lojo.clickercompetition.demo.repository.PlayerRepository;
+import es.lojo.clickercompetition.demo.repository.TeamRepository;
 import es.lojo.clickercompetition.demo.services.ImageServices;
 import es.lojo.clickercompetition.demo.services.PlayerUtilitiesService;
 import es.lojo.clickercompetition.demo.utilities.StringManagement;
@@ -34,10 +36,15 @@ public class PlayerController {
     private CityRepository citiRepo;
 
     @Autowired
+    private TeamRepository teamRepository;
+
+    @Autowired
     private PlayerUtilitiesService playerUtilitiesService;
 
     @Autowired
     private ImageServices imageServices;
+
+
 
 
 
@@ -111,6 +118,7 @@ public class PlayerController {
     }
 
     /**
+     * //TODO : DELETE FIRST PLAYER FROM TEAM ASK JAVI
      * Delete an User by id
      * @param id {Long} delete an user by id
      * @return {ResponseEntity}
@@ -118,10 +126,20 @@ public class PlayerController {
     @DeleteMapping(value = "player/{id}")
     public ResponseEntity<Object> deletePlayer( @PathVariable("id") Long id){
         //Throw exception
-        playerRepo.findById(id)
+        Player player = playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
-        playerRepo.deleteById(id);
-        return new ResponseEntity<>("Player with id "+id+" has been deleted", HttpStatus.OK);
+
+
+        try{
+            playerRepo.delete(player);
+            return new ResponseEntity<>("Player with id "+id+" has been deleted", HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<>("Player is already associate with a team\nRemove first from team",HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+
+
+
     }
 
     /**
@@ -139,6 +157,18 @@ public class PlayerController {
         player.setEncriptedPassword();
         playerRepo.save(player);
         return new ResponseEntity<>("Player with id "+id+ " has been updated", HttpStatus.OK);
+    }
+
+    /**
+     * Update clicks from front each 30 cliks
+     */
+    @PutMapping(value = "player/clicks/{id}")
+    public ResponseEntity<Object> UpdateClicks(@PathVariable("id") Long id) throws IOException{
+        Player player = playerRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id.toString()));
+        player.setClicks(player.getClicks() + 30);
+        playerRepo.save(player);
+        return new ResponseEntity<>(id+" - "+player.getClicks(), HttpStatus.OK);
     }
 
 
@@ -159,7 +189,7 @@ public class PlayerController {
         //Get City
         Optional<City> optionalCity = citiRepo.findCityByName(city.getName());
         if(optionalCity.isEmpty())
-            throw new EntityNotFoundException(id.toString());
+            return new ResponseEntity<>(city.getName() + " does not exists ",HttpStatus.NOT_FOUND);
         city = optionalCity.get();
 
         //add city to player
@@ -238,6 +268,9 @@ public class PlayerController {
     public ResponseEntity<Object> deletePlayerAvatar(@PathVariable("id") Long id){
         Player player = playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
+        if(player.getAvatar().equals("./images/default.png")){
+            return new ResponseEntity<>(player.getName() + "' doesn´t have avatar", HttpStatus.OK);
+        }
         imageServices.deleteImage(player.getAvatar());
         player.setAvatar("./images/default.png");
         playerRepo.save(player);
