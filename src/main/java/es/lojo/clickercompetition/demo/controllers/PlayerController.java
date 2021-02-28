@@ -61,7 +61,7 @@ public class PlayerController {
      * get all clicks sorted by clicks
      * @return {ResponseEntity}
      */
-    @PostMapping(value = "/players/clicks")
+    @GetMapping(value = "/players/clicks")
     public ResponseEntity<Object> allPlayerListOrder(){
         return new ResponseEntity<>(playerRepo.allPlayersListOrder(), HttpStatus.OK);
     }
@@ -118,7 +118,6 @@ public class PlayerController {
     }
 
     /**
-     * //TODO : DELETE FIRST PLAYER FROM TEAM ASK JAVI
      * Delete an User by id
      * @param id {Long} delete an user by id
      * @return {ResponseEntity}
@@ -128,18 +127,12 @@ public class PlayerController {
         //Throw exception
         Player player = playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
-
-
         try{
             playerRepo.delete(player);
             return new ResponseEntity<>("Player with id "+id+" has been deleted", HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<>("Player is already associate with a team\nRemove first from team",HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
-
-
-
     }
 
     /**

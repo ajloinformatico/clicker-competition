@@ -35,7 +35,7 @@ public class CityController {
      * List all Cities Order by count clicks
      * @return {ResponseEntity}: Ordered
      */
-    @PostMapping(value = "/cities/clicks")
+    @GetMapping(value = "/cities/clicks")
     public ResponseEntity<Object> allCityListOrder(){
         return new ResponseEntity<>(cityRepo.cityListAllOrder(), HttpStatus.OK);
     }
@@ -144,6 +144,14 @@ public class CityController {
         return new ResponseEntity<>(city.getName() + " update with Autonomous Community " +
                 authonomusCommunity.getName(),HttpStatus.OK);
     }
-    //TODO: GET AUTHONOMOUS COMMUNITY FROM CITY
-    //TODO: TEST CONTROLLERS
+
+    @GetMapping(value = "city/AuthonomousCommuniy/{id}")
+    public ResponseEntity<Object> getCityAutonomousCommunity(@PathVariable("id") Long id){
+        City city = cityRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id.toString()));
+        if(city.getAuthonomusCommunity() == null)
+            return new ResponseEntity<>(city.getName() + " has not Autonomous Community", HttpStatus.OK);
+
+        return new ResponseEntity<>(city.getAuthonomusCommunity(), HttpStatus.OK);
+    }
 }
