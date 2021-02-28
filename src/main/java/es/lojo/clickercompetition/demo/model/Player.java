@@ -45,6 +45,15 @@ public class Player {
             Set<Team> teams = new HashSet<>();
 
 
+    //Many to one -> Role
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn()
+    private Role role;
+
+
+
+
     //Methods to Set encrypted password , capitalized name and default avatar
     //they are only called in the sign in
     /**

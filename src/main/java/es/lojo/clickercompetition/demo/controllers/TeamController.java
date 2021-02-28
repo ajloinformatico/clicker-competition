@@ -171,7 +171,6 @@ public class TeamController {
      *
      * It's only when it is created
      */
-
     @PutMapping(value= "team/{id}")
     public ResponseEntity<Object> updateTeam(@RequestBody Team team, @PathVariable("id") Long id){
         Team oldTeam = teamRepo.findById(id).orElseThrow(
