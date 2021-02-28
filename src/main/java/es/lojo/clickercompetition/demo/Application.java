@@ -1,5 +1,6 @@
 package es.lojo.clickercompetition.demo;
 
+import es.lojo.clickercompetition.demo.Security.JWTAuthorizationFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @SpringBootApplication
 public class Application {
@@ -24,10 +26,11 @@ public class Application {
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.cors().disable()
-                    .csrf().disable()
+            http.cors().and().csrf().disable()
+                    .addFilterAfter(new JWTAuthorizationFilter(getApplicationContext()), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
-                    .antMatchers("/").permitAll();
+                    .antMatchers("/player/**").hasRole("player") //tienen que ser dos asteriscos
+                    .antMatchers("/").authenticated(); //Que esté logeado
         }
 
         @Bean

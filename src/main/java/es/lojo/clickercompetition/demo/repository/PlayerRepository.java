@@ -24,6 +24,8 @@ public interface PlayerRepository extends CrudRepository<Player, Long> {
 
     Optional<Player> findPlayerByMail(String mail);
 
+    Optional<Player> findPlayerByName(String name);
+
     /**
      * select all players ordered by clicks
      * @return {Player ArrayList}

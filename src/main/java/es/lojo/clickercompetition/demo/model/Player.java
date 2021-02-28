@@ -25,6 +25,10 @@ public class Player {
     private String name;
     private String surname;
     private String password;
+
+    @Column(length = 300)
+    String token;
+
     private int edad;
     private int clicks; //clicks de cada usuario
 

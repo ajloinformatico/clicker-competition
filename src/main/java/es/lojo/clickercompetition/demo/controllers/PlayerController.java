@@ -11,12 +11,15 @@ import es.lojo.clickercompetition.demo.repository.TeamRepository;
 import es.lojo.clickercompetition.demo.services.ImageServices;
 import es.lojo.clickercompetition.demo.services.PlayerUtilitiesService;
 import es.lojo.clickercompetition.demo.utilities.StringManagement;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +29,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -49,6 +53,61 @@ public class PlayerController {
     @Autowired
     private RoleRepository roleRepository;
 
+
+
+//TODO SOS
+//
+//    @GetMapping("/rol/{id}")
+//    public ResponseEntity<Object> roles(@PathVariable("id") Long id) {
+//        return new ResponseEntity<>(roleRepository.findUsers(id), HttpStatus.OK);
+//    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<Object> logout() {
+        Player player = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        player.setToken(null);
+        playerRepo.save(player);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestParam("name") String name,
+                                        @RequestParam("password") String password) {
+        String token = null;
+        // Test user/password
+        Player player = playerRepo.findPlayerByName(name)
+                .orElseThrow(() -> new EntityNotFoundException(name));
+        if(!new BCryptPasswordEncoder().matches(password, player.getPassword()))
+//            return new ResponseEntity<>("Incorrect password", HttpStatus.FORBIDDEN);
+            throw new EntityNotFoundException();
+        // Compruebo que el usuario tenga token generado y no esté caducado...
+        if(player.getToken() != null) {
+            try {
+                Jwts.parser().parse(player.getToken()).getBody();
+                return new ResponseEntity<>("", HttpStatus.CONFLICT);
+            } catch (Exception e) {
+                player.setToken(null);
+            }
+        }
+        // Generate token
+//        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+//                .commaSeparatedStringToAuthorityList("ROLE_USER");
+        String secretKey = "pestillo";
+        // TODO: Investigar todos los parámetros
+        token = Jwts
+                .builder()
+                .setId("AlbertIES")
+                .setSubject(name)
+                .claim("authorities",
+                        player.getRole())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 6000000))
+                .signWith(SignatureAlgorithm.HS512,
+                        secretKey.getBytes()).compact();
+        player.setToken(token);
+        playerRepo.save(player);
+        return new ResponseEntity<>(token, HttpStatus.OK);
+    }
 
 
 
@@ -293,5 +352,7 @@ public class PlayerController {
         return new ResponseEntity<>(player.getName() + "´s avatar deleted success", HttpStatus.OK);
 
     }
+
+
 }
 
