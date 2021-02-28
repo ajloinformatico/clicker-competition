@@ -31,6 +31,9 @@ public class Seeder implements CommandLineRunner {
     @Autowired
     private TeamRepository teamRepo;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
 
 
     //Execute on the run
@@ -70,19 +73,25 @@ public class Seeder implements CommandLineRunner {
         // pero instancio por mantener coherencia
 
 
+        //Roles
+        Role player = roleRepository.save(new Role("player"));
+        Role coach = roleRepository.save(new Role("coach"));
+        Role president = roleRepository.save(new Role("president"));
+
+
         //Player
         Player juan = playerRepo.save(new Player("Juan", "Lopez", "pestillo01", 34, 0, "juan@juan.es",
-                elPuerto));
+                elPuerto, player));
         Player diego = playerRepo.save(new Player("Diego", "Alcántara", "pestillo01", 19, 90, "deigo@diego.es",
-                andorraCity));
+                andorraCity, coach));
         Player elena = playerRepo.save(new Player("Elena", "Rosendo", "pestillo01", 20, 4, "elena@elena.es",
-                pizza));
+                pizza, president));
         Player alex = playerRepo.save(new Player("Alex", "Gwan", "pestillo01", 34, 34, "alex@alex.com",
-                onotro));
+                onotro, president));
         Player tim = playerRepo.save(new Player("Tim", "wistron", "pestillo01", 21, 210, "tim@tim.ir",
-                icelandCity2));
+                icelandCity2, player));
         Player atom = playerRepo.save(new Player("Atom", "Visual", "pestillo01", 34, 40, "tim@tim.es",
-                icelandCity3));
+                icelandCity3, player));
 
 
         Team reyesDelClick = new Team("Reyes del Click");

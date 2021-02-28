@@ -21,6 +21,7 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @Column(unique = true) //role name is unique (president, coach or player)
     String name;
 
     // One to Many -> Player

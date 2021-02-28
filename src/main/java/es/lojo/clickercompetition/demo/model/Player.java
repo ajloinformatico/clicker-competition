@@ -100,7 +100,7 @@ public class Player {
 
 
     //img will be insert after crete
-    public Player(String name, String surname, String password, int edad, int clicks, String mail, City city){
+    public Player(String name, String surname, String password, int edad, int clicks, String mail, City city, Role role){
         this.name = name;
         this.surname = surname;
         this.password = new BCryptPasswordEncoder().encode(password);
@@ -109,9 +109,10 @@ public class Player {
         this.mail = mail;
         this.city = city;
         this.avatar = "./images/default.png";
+        this.role = role;
     }
 
-    public Player(String name, String surname, String password, int edad, int clicks, String mail, City city, String avatar){
+    public Player(String name, String surname, String password, int edad, int clicks, String mail, City city, String avatar, Role role){
         this.name = name;
         this.surname = surname;
         this.password = new BCryptPasswordEncoder().encode(password);
@@ -120,10 +121,6 @@ public class Player {
         this.mail = mail;
         this.city = city;
         this.avatar = avatar;
+        this.role = role;
     }
-
-
-
-
-
 }

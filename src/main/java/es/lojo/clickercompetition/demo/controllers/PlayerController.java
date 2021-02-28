@@ -2,9 +2,11 @@ package es.lojo.clickercompetition.demo.controllers;
 
 import es.lojo.clickercompetition.demo.model.City;
 import es.lojo.clickercompetition.demo.model.Player;
+import es.lojo.clickercompetition.demo.model.Role;
 import es.lojo.clickercompetition.demo.model.Team;
 import es.lojo.clickercompetition.demo.repository.CityRepository;
 import es.lojo.clickercompetition.demo.repository.PlayerRepository;
+import es.lojo.clickercompetition.demo.repository.RoleRepository;
 import es.lojo.clickercompetition.demo.repository.TeamRepository;
 import es.lojo.clickercompetition.demo.services.ImageServices;
 import es.lojo.clickercompetition.demo.services.PlayerUtilitiesService;
@@ -43,6 +45,9 @@ public class PlayerController {
 
     @Autowired
     private ImageServices imageServices;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
 
@@ -91,6 +96,11 @@ public class PlayerController {
         if(playerUtilitiesService.addPlayerCheck(player))
             return new ResponseEntity<>(player.getName() +" player already exists ", HttpStatus.CONFLICT);
 
+        //Set correct role
+        Role role = roleRepository.findRoleByName(player.getRole().getName())
+                .orElseThrow(() -> new EntityNotFoundException(player.getRole().getName()));
+        player.setRole(role);
+
         playerRepo.save(player);
         return new ResponseEntity<>("Player with name " + player.getName() + " has been registered ", HttpStatus.OK );
     }
@@ -106,13 +116,22 @@ public class PlayerController {
     public ResponseEntity<Object> playerAddWithCity(@RequestBody Player player, @PathVariable("id") Long id) throws IOException {
         Optional<City> city = citiRepo.findById(id);
 
+        //Set correct role
+        Role role = roleRepository.findRoleByName(player.getRole().getName())
+                .orElseThrow(() -> new EntityNotFoundException(player.getRole().getName()));
+        player.setRole(role);
+
+        //Check city
         if(city.isEmpty())
             return new ResponseEntity<>(" The city you are trying to associate does not exist ",HttpStatus.NOT_FOUND);
 
+        //ajusta player
         if(playerUtilitiesService.addPlayerCheck(player))
             return new ResponseEntity<>(player.getName() +" player already exists ", HttpStatus.CONFLICT);
 
+
         player.setCity(city.get());
+        player.setRole(role);
         playerRepo.save(player);
         return new ResponseEntity<>("Player with name " + player.getName() + " has been registered ", HttpStatus.OK );
     }
@@ -143,11 +162,15 @@ public class PlayerController {
      */
     @PutMapping(value = "player/{id}")
     public ResponseEntity<Object> updatePlayer(@RequestBody Player player ,@PathVariable("id") Long id){
-        playerRepo.findById(id)
+        Player oldPlayer = playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
 
+        //Set id
+        player.setId(oldPlayer.getId());
         player.setCapitalizedNames();
         player.setEncriptedPassword();
+        //Set role because user data comes without role
+        player.setRole(oldPlayer.getRole());
         playerRepo.save(player);
         return new ResponseEntity<>("Player with id "+id+ " has been updated", HttpStatus.OK);
     }
