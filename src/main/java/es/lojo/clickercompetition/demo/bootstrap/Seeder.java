@@ -84,21 +84,24 @@ public class Seeder implements CommandLineRunner {
         Player atom = playerRepo.save(new Player("Atom", "Visual", "pestillo01", 34, 40, "tim@tim.es",
                 icelandCity3));
 
-        //Team_player
-        //Team First
-        Team reyesDelClick = teamRepo.save(new Team("Reyes del Click"));
-        Team blueDragonClickMaster = teamRepo.save(new Team("Blue Dragon Click master"));
-        Team clickRedTeam = teamRepo.save(new Team("Click red team"));
-        Team clickeame = teamRepo.save(new Team("Clickeame"));
+
+        Team reyesDelClick = new Team("Reyes del Click");
+        Team blueDragonClickMaster = new Team("Blue Dragon Click master");
+        Team clickRedTeam = new Team("Click red team");
+        Team clickeame = new Team("Clickeame");
 
 
-        //TODO Does not add data to the relationship
-        //add players to Teams
+
+
+        //add players to Teams and update clicks
         reyesDelClick.addPlayersList(new ArrayList<Player>(Arrays.asList(juan, diego)));
+        reyesDelClick.updateCliks();
         blueDragonClickMaster.addPlayer(elena);
+        blueDragonClickMaster.updateCliks();
         clickRedTeam.addPlayer(alex);
+        clickRedTeam.updateCliks();
         clickeame.addPlayersList(new ArrayList<Player>(Arrays.asList(tim, atom)));
-
+        clickeame.updateCliks();
         //List<Team> teamsList = new ArrayList<Team>(Arrays.asList(reyesDelClick, blueDragonClickMaster, clickRedTeam, clickeame));
         teamRepo.saveAll(new ArrayList<Team>(Arrays.asList(reyesDelClick, blueDragonClickMaster, clickRedTeam, clickeame)));
     }

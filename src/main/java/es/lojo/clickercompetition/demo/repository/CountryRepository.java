@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.ArrayList;
 
 /**
- * @author: antoniojoselojoojeda
+ * @author antoniojoselojoojeda
  * Country repository
  */
 public interface CountryRepository extends CrudRepository<Country, Long> {

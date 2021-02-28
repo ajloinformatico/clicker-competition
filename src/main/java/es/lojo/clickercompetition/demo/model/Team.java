@@ -1,6 +1,7 @@
 package es.lojo.clickercompetition.demo.model;
 import es.lojo.clickercompetition.demo.model.Player;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import es.lojo.clickercompetition.demo.utilities.StringManagement;
 import lombok.*;
 import es.lojo.clickercompetition.demo.utilities.MyDates;
 
@@ -48,6 +49,14 @@ public class Team {
 
 
 
+    public void setCapitalizedNames(){
+        this.name = StringManagement.capitalize(this.name);
+    }
+    public void setDefaulDate(){
+        this.date = MyDates.today();
+    }
+
+
     //empty constructor required
     public Team() {}
 
@@ -57,25 +66,27 @@ public class Team {
         this.date = MyDates.today();
     }
 
-    //team creation with date set
-    public Team(Long id, String name, String date) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-    }
-
-    //Team with players
-    public Team(Long id, String name, String date, Player player){
-        this.id = id;
-        this.name = name;
-        this.date = date;
-
-        //update players
-        players.add(player);
-
-        //update players in the other side
-        player.getTeams().add(this);
-    }
+//    //TODO: maybe i would have to delete this
+//    //team creation with date set
+//    public Team(Long id, String name, String date) {
+//        this.id = id;
+//        this.name = name;
+//        this.date = date;
+//        this.clicks = clicks;
+//    }
+//
+//    //Team with players
+//    public Team(Long id, String name, String date, Player player){
+//        this.id = id;
+//        this.name = name;
+//        this.date = date;
+//
+//        //update players
+//        players.add(player);
+//
+//        //update players in the other side
+//        player.getTeams().add(this);
+//    }
     public Team(Long id,String name, Long clicks){
         this.id = id;
         this.name = name;
@@ -103,4 +114,24 @@ public class Team {
             player.getTeams().add(this);
         });
     }
+
+    /**
+     * Delete player from team
+     * @Param {Long} id ; Player id
+     */
+    public void deleteOnePlayerFromTeam(Player player){
+        players.remove(player);
+        player.getTeams().remove(this);
+    }
+
+    /**
+     * AutoUpdate Clicks
+     */
+    public void updateCliks(){
+        this.clicks = 0L;
+        players.forEach(player -> {
+            this.clicks += player.getClicks();
+        });
+    }
+
 }

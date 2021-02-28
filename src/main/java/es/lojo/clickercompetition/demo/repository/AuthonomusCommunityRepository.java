@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  *
- * @author: antonio
+ * @author antonio
  */
 public interface AuthonomusCommunityRepository extends CrudRepository<AuthonomusCommunity, Long> {
 
