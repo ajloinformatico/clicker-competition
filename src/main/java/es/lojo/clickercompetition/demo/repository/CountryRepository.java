@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author antoniojoselojoojeda
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface CountryRepository extends CrudRepository<Country, Long> {
 
-    //Example findAllby --> defined by default
+    public Optional<Country> findCountryByName(String name);
 
     /**
      * Execute :
@@ -31,8 +32,5 @@ public interface CountryRepository extends CrudRepository<Country, Long> {
             "JOIN  Player pl  ON c.id = pl.city.id " +
             "GROUP BY co.id ORDER BY SUM(pl.clicks) DESC ")
     public ArrayList<Country> getOrderByClicksCountry();
-
-
-
 
 }

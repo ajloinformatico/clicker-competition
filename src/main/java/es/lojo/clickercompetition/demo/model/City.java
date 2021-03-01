@@ -45,11 +45,13 @@ public class City {
 
     public City(String name){
         this.name = name;
+        this.setCapitalizedName();
     }
 
     public City(String name, AuthonomusCommunity authonomusCommunity){
         this.name = name;
         this.authonomusCommunity = authonomusCommunity;
+        this.setCapitalizedName();
     }
 
 

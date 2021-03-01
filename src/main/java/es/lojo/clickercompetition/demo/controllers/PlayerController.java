@@ -221,10 +221,12 @@ public class PlayerController {
     public ResponseEntity<Object> updatePlayer(@RequestBody Player player ,@PathVariable("id") Long id){
         Player oldPlayer = playerRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
-
+        player.setCapitalizedNames();
+        if(playerRepo.findPlayerByName(player.getName()).isPresent())
+            return new ResponseEntity<>("This name is already associated with another player"
+                    ,HttpStatus.INTERNAL_SERVER_ERROR);
         //Set id
         player.setId(oldPlayer.getId());
-        player.setCapitalizedNames();
         player.setEncriptedPassword();
         //Set role because user data comes without role
         player.setRole(oldPlayer.getRole());
@@ -246,7 +248,6 @@ public class PlayerController {
 
 
     /**
-     * Set city TODO: REFACTO LIKE CityController.updateCityAc
      * @param city {City}: city to add
      * @param id {Long}: id of user to update
      * @return ResponseEntity
@@ -273,8 +274,8 @@ public class PlayerController {
 
     /**
      * Get a city of a player
-     * @param id
-     * @return
+     * @param id {Long}: id player to get
+     * @return {ResponseEntity}
      */
     @GetMapping(value = "player/city/{id}")
     public ResponseEntity<Object> getPlayerCity(@PathVariable("id") Long id){
@@ -348,7 +349,6 @@ public class PlayerController {
         player.setAvatar("./images/default.png");
         playerRepo.save(player);
         return new ResponseEntity<>(player.getName() + "´s avatar deleted success", HttpStatus.OK);
-
     }
 
 

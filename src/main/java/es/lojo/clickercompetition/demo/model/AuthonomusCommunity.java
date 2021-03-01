@@ -1,6 +1,7 @@
 package es.lojo.clickercompetition.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import es.lojo.clickercompetition.demo.utilities.StringManagement;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,16 +38,22 @@ public class AuthonomusCommunity {
     @OneToMany(mappedBy = "authonomusCommunity", cascade = CascadeType.ALL)
     Set<City> fromAutonomusCommunity = new HashSet<>();
 
+    public void setCapitalizedName(){
+        this.name = StringManagement.capitalize(this.name);
+    }
+
     //Empty Constructor
     public AuthonomusCommunity() {}
 
     public AuthonomusCommunity(String name){
         this.name = name;
+        setCapitalizedName();
     }
 
     public AuthonomusCommunity(String name, Country country){
         this.name = name;
         this.country = country;
+        setCapitalizedName();
     }
 
     public AuthonomusCommunity(Long id, String name, Long clicks) {
