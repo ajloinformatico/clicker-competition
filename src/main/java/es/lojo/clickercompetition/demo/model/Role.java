@@ -14,6 +14,7 @@ import java.util.Set;
  * President -> Can create new Teams or delete
  * Coach -> Can change team image and and and delete user of a team
  * Player -> Only clicks
+ * 1 - M -> Player
  */
 @Data
 @Entity

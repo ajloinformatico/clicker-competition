@@ -13,6 +13,13 @@ import java.util.Set;
 
 
 import javax.persistence.*;
+
+/**
+ * @author antoniojoselojoojeda
+ * M:N -> Team
+ * M:1 -> City
+ * M:1 -> Role
+ */
 @Entity
 @Data
 public class Player {
