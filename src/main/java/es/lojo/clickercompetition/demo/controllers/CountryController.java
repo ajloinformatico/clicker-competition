@@ -78,7 +78,7 @@ public class CountryController {
             countryRepo.delete(country);
             return new ResponseEntity<>(country.getName() + " has been deleted ", HttpStatus.OK);
         }catch (Exception ex){
-            return new ResponseEntity<>("Something was wrong ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Country has communities associated", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -97,7 +97,7 @@ public class CountryController {
             return new ResponseEntity<>("This name is already associate with another country ",
                     HttpStatus.INTERNAL_SERVER_ERROR);
         oldCountry.setName(country.getName());
-        countryRepo.save(country);
+        countryRepo.save(oldCountry);
         return new ResponseEntity<>("Country with id "+id+" has been updated", HttpStatus.OK);
     }
 

@@ -148,7 +148,24 @@ public class CityController {
                 authonomusCommunity.getName(),HttpStatus.OK);
     }
 
-    @GetMapping(value = "city/AuthonomousCommuniy/{id}")
+    /**
+     * Break the relationship between city and autonomous community
+     * @param id {Long}: City id
+     * @return {ResponseEntity}
+     */
+    @DeleteMapping("city/AutonomousCommunity/{id}")
+    public ResponseEntity<Object> deleteCityAc(@PathVariable("id") Long id){
+        City city = cityRepo.findById(id).orElseThrow(()->new EntityNotFoundException(id.toString()));
+        if(city.getAuthonomusCommunity() == null)
+            return new ResponseEntity<>(city.getName() + " hasnt Autonomous Community associated",
+                    HttpStatus.NOT_FOUND);
+
+        city.setAuthonomusCommunity(null);
+        cityRepo.save(city);
+        return new ResponseEntity<>(city.getName()+" no longer has Autonomous Community", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "city/AutonomousCommunity/{id}")
     public ResponseEntity<Object> getCityAutonomousCommunity(@PathVariable("id") Long id){
         City city = cityRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));

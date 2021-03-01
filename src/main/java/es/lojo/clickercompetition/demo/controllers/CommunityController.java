@@ -123,6 +123,7 @@ public class CommunityController {
             return new ResponseEntity<>("This name is already associate with another Autonomous Community",
                     HttpStatus.INTERNAL_SERVER_ERROR);
         oldAc.setName(ac.getName());
+        communityRepository.save(oldAc);
         return new ResponseEntity<>("Autonomus Community with id "+id+" has been update", HttpStatus.OK);
     }
 
@@ -141,7 +142,8 @@ public class CommunityController {
         Country country1 = countryRepository.findCountryByName(country.getName())
                 .orElseThrow(()->new EntityNotFoundException(id.toString()));
         ac.setCountry(country1);
-        return new ResponseEntity<>(ac.getName() + " updated with Country"
+        communityRepository.save(ac);
+        return new ResponseEntity<>(ac.getName() + " updated with Country "
                 + country1.getName(), HttpStatus.OK);
     }
 
@@ -155,7 +157,24 @@ public class CommunityController {
         AuthonomusCommunity ac = communityRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException(id.toString()));
         if(ac.getCountry() == null)
-            return new ResponseEntity<>(ac.getName() + " has not Country",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(ac.getName() + " has not country associated",HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(ac.getCountry(), HttpStatus.OK);
+    }
+
+    /**
+     * Break the relationship between autonomous Community and country
+     * @param id {Long}: City id
+     * @return {ResponseEntity}
+     */
+    @DeleteMapping(value = "community/country/{id}")
+    public ResponseEntity<Object> deleteCityAuc(@PathVariable("id") Long id){
+        AuthonomusCommunity ac = communityRepository.findById(id)
+                .orElseThrow(()->new EntityNotFoundException(id.toString()));
+
+        if(ac.getCountry() == null)
+            return new ResponseEntity<>(ac.getName()+" has not country associated", HttpStatus.NOT_FOUND);
+        ac.setCountry(null);
+        communityRepository.save(ac);
+        return new ResponseEntity<>(ac.getName()+" no longer has country", HttpStatus.OK);
     }
 }
