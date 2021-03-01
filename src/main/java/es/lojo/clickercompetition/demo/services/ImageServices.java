@@ -61,7 +61,8 @@ public class ImageServices {
         } else {
             Team team = teamRepo.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException(id.toString()));
-            //TODO Avatar
+            team.setTeamAvatar(urlSave);
+            teamRepo.save(team);
         }
     }
 

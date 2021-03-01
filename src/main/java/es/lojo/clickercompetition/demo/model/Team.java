@@ -32,6 +32,7 @@ public class Team {
     private String password;
     private String date; //date it is created
     private Long clicks; //Only for clicks
+    private String TeamAvatar;
 
 
     //CREATE TABLES CREATE TABLES SIMULTANEOUSLY
@@ -56,6 +57,9 @@ public class Team {
         this.date = MyDates.today();
     }
 
+    public void setDefaultTeamAvatar(){
+        this.setTeamAvatar("./images/default.png");
+    }
 
     //empty constructor required
     public Team() {}
@@ -64,29 +68,10 @@ public class Team {
     public Team(String name){
         this.name = name;
         this.date = MyDates.today();
+        this.TeamAvatar = "./images/default.png";
     }
 
-//    //TODO: maybe i would have to delete this
-//    //team creation with date set
-//    public Team(Long id, String name, String date) {
-//        this.id = id;
-//        this.name = name;
-//        this.date = date;
-//        this.clicks = clicks;
-//    }
-//
-//    //Team with players
-//    public Team(Long id, String name, String date, Player player){
-//        this.id = id;
-//        this.name = name;
-//        this.date = date;
-//
-//        //update players
-//        players.add(player);
-//
-//        //update players in the other side
-//        player.getTeams().add(this);
-//    }
+
     public Team(Long id,String name, Long clicks){
         this.id = id;
         this.name = name;

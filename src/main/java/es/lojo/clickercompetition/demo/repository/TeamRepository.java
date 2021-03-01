@@ -21,6 +21,8 @@ public interface TeamRepository extends CrudRepository<Team, Long> {
     public Optional<Team> findTeamByName(String name);
 
 
+
+
     @Query("SELECT new es.lojo.clickercompetition.demo.model.Team(id, name, clicks) " +
             "FROM Team ORDER BY clicks DESC ")
     public ArrayList<Team> findAllTeamssOrder();
