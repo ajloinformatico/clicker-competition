@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 public class CommunityController {
 
-    //TODO TEST
 
     @Autowired
     AuthonomusCommunityRepository communityRepository;
@@ -29,7 +28,7 @@ public class CommunityController {
      * List all Communities
      * @return {ResponseEntity}: Communities Json
      */
-    @GetMapping(value = "/community")
+    @GetMapping(value = "/communities")
     public ResponseEntity<Object> allCommunitieslist(){
         return new ResponseEntity<>(communityRepository.findAll(), HttpStatus.OK);
     }

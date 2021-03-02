@@ -54,11 +54,17 @@ public class PlayerController {
 
 
 //TODO SOS
-//
-//    @GetMapping("/rol/{id}")
-//    public ResponseEntity<Object> roles(@PathVariable("id") Long id) {
-//        return new ResponseEntity<>(roleRepository.findUsers(id), HttpStatus.OK);
-//    }
+
+    /**
+     *
+     * @param id {Long}: Player id
+     * @return {ResponseEntity}
+     */
+    @GetMapping("/rol/{id}")
+    public ResponseEntity<Object> roles(@PathVariable("id") Long id) {
+        Player player = playerRepo.findById(id).orElseThrow(()->new EntityNotFoundException(id.toString()));
+        return new ResponseEntity<>(player.getRole(), HttpStatus.OK);
+    }
 
     @GetMapping("/logout")
     public ResponseEntity<Object> logout() {

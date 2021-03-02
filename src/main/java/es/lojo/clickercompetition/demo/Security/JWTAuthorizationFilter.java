@@ -106,9 +106,15 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter{
     private void setUpSpringAuthentication(Player player) {
 
         Hibernate.initialize(player.getRole());
+
+        //Save Roles in a Array
+        //Add player to the rol
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(player.getRole());
+
         UsernamePasswordAuthenticationToken auth =
                 new UsernamePasswordAuthenticationToken(player, null,
-                        (Collection<? extends GrantedAuthority>) player.getRole());
+                       roles);
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }
