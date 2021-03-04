@@ -27,27 +27,29 @@ public class Application {
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+
+            Role player = new Role("player");
+            Role coach = new Role("coach");
+            Role president = new Role("president");
+
+            //entities in plural are allowed to all to see statistics
+            //players and coachs can work with player and team and other entities only for president
             http.cors().and().csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(getApplicationContext()), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
-                    .antMatchers("/login/**").permitAll()
-                    .antMatchers("/rol/**").authenticated()
-                    //entities in plural are allowed to all to see statistics
-                    .antMatchers("/players/**").authenticated()
-                    .antMatchers("/teams/**").authenticated()
-                    .antMatchers("/cities/**").authenticated()
-                    .antMatchers("/communities/**").authenticated()
-                    .antMatchers("/countries/**").authenticated()
-
-                    //players and coachs can work with player and team and other entities only for president
-                    .antMatchers("/player/**").hasAnyRole("player","coach")
-                    .antMatchers("/team/**").hasRole("coach")
-                    .antMatchers("/city/**").hasRole("president")
-                    .antMatchers("/community/**").hasRole("president")
-                    .antMatchers("/country/**").hasRole("president")
-
-
-                    .antMatchers("/").authenticated();
+                        .antMatchers("/login/**").permitAll()
+                        .antMatchers("/rol/**").authenticated()
+                        .antMatchers("/players/**").authenticated()
+                        .antMatchers("/teams/**").authenticated()
+                        .antMatchers("/cities/**").authenticated()
+                        .antMatchers("/communities/**").authenticated()
+                        .antMatchers("/countries/**").authenticated()
+                        .antMatchers("/player/**").hasAnyRole("coach","player")
+                        .antMatchers("/team/**").hasRole("coach")
+                        .antMatchers("/city/**").hasRole("president")
+                        .antMatchers("/community/**").hasRole("president")
+                        .antMatchers("/country/**").hasRole("president")
+                        .antMatchers("/").permitAll();
         }
 
         @Bean

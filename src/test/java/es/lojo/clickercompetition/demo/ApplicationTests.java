@@ -1,19 +1,18 @@
 package es.lojo.clickercompetition.demo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import es.lojo.clickercompetition.demo.bootstrap.Seeder;
-import es.lojo.clickercompetition.demo.controllers.CountryController;
+
+import es.lojo.clickercompetition.demo.controllers.*;
 import es.lojo.clickercompetition.demo.model.*;
 import es.lojo.clickercompetition.demo.repository.*;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
-import org.aspectj.lang.annotation.Before;
-import org.assertj.core.api.Assert;
+// import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 @SpringBootTest
@@ -33,7 +32,7 @@ class ApplicationTests {
 //
 //    assert --> check
 
-    // GET REPOSITORIES
+    //repositories
     @Autowired
     private CountryRepository countryRepository;
 
@@ -52,12 +51,169 @@ class ApplicationTests {
     @Autowired
     private TeamRepository teamRepository;
 
-    //GET CONTROLLERS
+    //controllers
     @Autowired
     private CountryController countryController;
 
+    @Autowired
+    private CommunityController communityController;
 
-    //TEST COUNTRY
+    @Autowired
+    private CityController cityController;
+
+    @Autowired
+    private PlayerController playerController;
+
+    @Autowired
+    public TeamController teamController;
+
+
+    //TEST Country
+
+    /**
+     * Check Country Controller context
+     */
+    @Test
+    public void CountryControllerContexLoad() {
+        assertThat(countryController).isNotNull();
+    }
+
+    /**
+     * Check testAllCountryList
+     */
+    @Test
+    public void testAllCountryLis() {
+        // Check HttpCode
+        ResponseEntity<Object> httpResponse = countryController.allCountryList();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), countryRepository.findAll());
+    }
+
+    /**
+     * Check allCountryListOrder
+     */
+    @Test
+    public void testAllCountryListOrder(){
+        //Check HttpCode
+        ResponseEntity<Object> httpResponse = countryController.allCountryListOrder();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), countryRepository.getOrderByClicksCountry());
+    }
+
+    /**
+     * Check getOneCountry
+     */
+    @Test
+    public void testGetOneCountry(){
+        //Check HttpCode
+        ResponseEntity<Object> httpResponse = countryController.getOneCountry(1L);
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Optional<Country> country = countryRepository.findById(1L);
+        // Check repo find country
+        assertThat(country).isPresent();
+        // Check response with country
+        Assertions.assertEquals(httpResponse.getBody(), country.get());
+    }
+
+
+    /**
+     * Check add Country
+     */
+    @Test
+    public void testAddSimpleCountry(){
+        Country country = new Country("Islandia");
+        ResponseEntity<Object> httpResponse = countryController.addSimpleCountry(country);
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with country
+        Assertions.assertEquals(httpResponse.getBody(), "Country with name "+country.getName());
+    }
+
+    /**
+     * Check delete country
+     */
+    @Test
+    public void testDeleteCountry(){
+        Country country =  countryRepository.save(new Country("Isandia"));
+        ResponseEntity<Object> httpResponse = countryController.deleteCountry(country.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        //Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with country
+        Assertions.assertEquals(httpResponse.getBody(), country.getName()+" has been deleted ");
+    }
+
+    /**
+     * Check update country
+     */
+    @Test
+    public void updateCountry(){
+        Country oldCountry = countryRepository.save(new Country("Islandia"));
+        Country newCountry = new Country("infolojosCountry");
+        ResponseEntity<Object> httpResponse = countryController.updateCountry(newCountry, oldCountry.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        //Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        //Check data
+        assert countryRepository.findCountryByName(newCountry.getName()).isPresent();
+        // Check response with country
+        Assertions.assertEquals(httpResponse.getBody(), "Country with id "+oldCountry.getId()+" has been updated");
+    }
+
+
+    //TEST Community
+    /**
+     * Check Community Controller context
+     */
+    @Test
+    public void CommunityControllerControllerContexLoad() {
+        assertThat(communityController).isNotNull();
+    }
+
+
+    //TEST City
+
+    /**
+     * Check City Controller context
+     */
+    @Test
+    public void CityControllerControllerContexLoad() {
+        assertThat(cityController).isNotNull();
+    }
+
+
+    //TEST Player
+    /**
+     * Check Player Controller context
+     */
+    @Test
+    public void PlayerControllerControllerContexLoad() {
+        assertThat(playerController).isNotNull();
+    }
+
+
+    //TEST Team
+    /**
+     * Check Player Controller context
+     */
+    @Test
+    public void TeamControllerControllerContexLoad() {
+        assertThat(teamController).isNotNull();
+    }
+
 
     @Test //Test insert a country
     void testInsertCountry() {
@@ -79,98 +235,10 @@ class ApplicationTests {
     }
 
     @Test
-    public void CountryControllerContexLoad() throws Exception {
-        assertThat(countryController).isNotNull();
-    }
-
-    @Ignore
-    @Test
-    void seederSelectsClicks(){
-        //Countries
-        Country spain = countryRepository.save(new Country("Spain"));
-        Country andorra = countryRepository.save(new Country("Andorra"));
-        Country iceland = countryRepository.save(new Country("Iceland"));
-        Country italy = countryRepository.save(new Country("Italy"));
-
-        //AuthonomusCommunity
-        AuthonomusCommunity andalucia = communityRepository.save(new AuthonomusCommunity("Andalucia", spain));
-        AuthonomusCommunity madrid = communityRepository.save(new AuthonomusCommunity("Madrid", spain));
-        AuthonomusCommunity barcelona = communityRepository.save(new AuthonomusCommunity("Barcelona", spain));
-        AuthonomusCommunity galicia = communityRepository.save(new AuthonomusCommunity("Galicia", spain));
-        AuthonomusCommunity iceland1 = communityRepository.save(new AuthonomusCommunity("Akranes", iceland));
-        AuthonomusCommunity iceland2 = communityRepository.save(new AuthonomusCommunity("Iceland 2", iceland));
-        AuthonomusCommunity icelnad3 = communityRepository.save(new AuthonomusCommunity("Iceland3", iceland));
-        AuthonomusCommunity abruzos = communityRepository.save(new AuthonomusCommunity("Abruzos", italy));
-        AuthonomusCommunity apuila = communityRepository.save(new AuthonomusCommunity("Apuila", italy));
-        AuthonomusCommunity andorraComunidad = communityRepository.save(new AuthonomusCommunity("Andorra", andorra));
-
-        //City
-        City elPuerto = cityRepository.save(new City("El Puerto", andalucia));
-        City campoReal = cityRepository.save(new City("Campo Real", madrid));
-        City barcelonaCity = cityRepository.save(new City("Barcelona", barcelona));
-        City galiciaCity = cityRepository.save(new City("Galicia", galicia));
-        City onotro = cityRepository.save(new City("Onotro", iceland1));
-        City icelandCity2 = cityRepository.save(new City("Icelandcity2", iceland2));
-        City icelandCity3 = cityRepository.save(new City("Icelandcity3", icelnad3));
-        City pizza = cityRepository.save(new City("Pizza", abruzos));
-        City bari = cityRepository.save(new City("Bari", apuila));
-        City andorraCity = cityRepository.save(new City("Andorra", andorraComunidad));
-
-        //se que no es necesario en team y player porque no hay tablas que requieran de ellas
-        // pero instancio por mantener coherencia
-
-
-        //Roles
-        Role player = roleRepository.save(new Role("player"));
-        Role coach = roleRepository.save(new Role("coach"));
-        Role president = roleRepository.save(new Role("president"));
-
-
-        //Player
-        Player juan = playerRepository.save(new Player("Juan", "Lopez", "pestillo01", 34, 0, "juan@juan.es",
-                elPuerto, player));
-        Player diego = playerRepository.save(new Player("Diego", "Alcántara", "pestillo01", 19, 90, "deigo@diego.es",
-                andorraCity, coach));
-        Player elena = playerRepository.save(new Player("Elena", "Rosendo", "pestillo01", 20, 4, "elena@elena.es",
-                pizza, president));
-        Player alex = playerRepository.save(new Player("Alex", "Gwan", "pestillo01", 34, 34, "alex@alex.com",
-                onotro, president));
-        Player tim = playerRepository.save(new Player("Tim", "wistron", "pestillo01", 21, 210, "tim@tim.ir",
-                icelandCity2, player));
-        Player atom = playerRepository.save(new Player("Atom", "Visual", "pestillo01", 34, 40, "tim@tim.es",
-                icelandCity3, player));
-
-
-        Team reyesDelClick = new Team("Reyes del Click");
-        Team blueDragonClickMaster = new Team("Blue Dragon Click master");
-        Team clickRedTeam = new Team("Click red team");
-        Team clickeame = new Team("Clickeame");
-
-
-
-
-        //add players to Teams and update clicks
-        reyesDelClick.addPlayersList(new ArrayList<Player>(Arrays.asList(juan, diego)));
-        reyesDelClick.updateCliks();
-        blueDragonClickMaster.addPlayer(elena);
-        blueDragonClickMaster.updateCliks();
-        clickRedTeam.addPlayer(alex);
-        clickRedTeam.updateCliks();
-        clickeame.addPlayersList(new ArrayList<Player>(Arrays.asList(tim, atom)));
-        clickeame.updateCliks();
-        //List<Team> teamsList = new ArrayList<Team>(Arrays.asList(reyesDelClick, blueDragonClickMaster, clickRedTeam, clickeame));
-        teamRepository.saveAll(new ArrayList<Team>(Arrays.asList(reyesDelClick, blueDragonClickMaster, clickRedTeam, clickeame)));
-    }
-
-    @Test
     public void testGetOrderByClicksCountry() throws Exception{
-
         //Check repository method
         ArrayList<Country> countrysOrdered = countryRepository.getOrderByClicksCountry();
         assert ! countrysOrdered.isEmpty();
-
-        //Check controller
-        assertThat(countryController).isNotNull();
     }
 
 }
