@@ -467,7 +467,7 @@ class ApplicationTests {
      */
     @Test
     public void testDeletePlayer(){
-        Optional<Player> player = playerRepository.findPlayerByName("Benito");
+        Optional<Player> player = playerRepository.findPlayerByNameAndSurname("Benito", "Bendito");
         assertThat(player).isPresent();
         ResponseEntity<Object> httpResponse = playerController.deletePlayer(player.get().getId());
         //Check HttpCode
