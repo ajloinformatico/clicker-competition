@@ -218,7 +218,8 @@ public class PlayerController {
     }
 
     /**
-     * Update a player
+     * Update a player with this method the image is also updated
+     * but I decided to separate it into different requests
      * @param player {player} player dates to update
      * @param id {id} id of the player to update
      * @return ResponseEntity

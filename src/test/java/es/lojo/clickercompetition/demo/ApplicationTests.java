@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -145,7 +148,7 @@ class ApplicationTests {
      */
     @Test
     public void testDeleteCountry(){
-        Country country =  countryRepository.save(new Country("Isandia"));
+        Country country =  countryRepository.save(new Country("Islandia"));
         ResponseEntity<Object> httpResponse = countryController.deleteCountry(country.getId());
         //Check HttpCode
         Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
@@ -175,6 +178,7 @@ class ApplicationTests {
 
 
     //TEST Community
+
     /**
      * Check Community Controller context
      */
@@ -183,8 +187,302 @@ class ApplicationTests {
         assertThat(communityController).isNotNull();
     }
 
+    /**
+     * test allCommunitieslist
+     */
+    @Test
+    public void testAllCommunitiesList(){
+        // Check HttpCode
+        ResponseEntity<Object> httpResponse = communityController.allCommunitieslist();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), communityRepository.findAll());
+    }
+
+    /**
+     * test allCommunitieslist
+     */
+    @Test
+    public void testAllCommunitieslist(){
+        //Check HttpCode
+        ResponseEntity<Object> httpResponse = communityController.allCommunitiesListOrder();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), communityRepository.allComunitiesListOrder());
+    }
+
+    /**
+     * Check getOneCommunity
+     */
+    @Test
+    public void testGetOneCommunity(){
+        //Check HttpCode
+        AuthonomusCommunity community = communityRepository.save(new AuthonomusCommunity("Catalunya"));
+        ResponseEntity<Object> httpResponse = communityController.getOneCommunity(community.getId());
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check repo find country
+        assertThat(communityRepository.findAuthonomusCommunityByName(community.getName())).isPresent();
+        // Check response body is correct with community
+        Assertions.assertEquals(httpResponse.getBody(), community);
+    }
+
+    /**
+     * Check add Community
+     */
+    @Test
+    public void testAddSimpleCommunity(){
+        AuthonomusCommunity community = new AuthonomusCommunity("Islandia");
+        ResponseEntity<Object> httpResponse = communityController.communityAddSimple(community);
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with community
+        Assertions.assertEquals(httpResponse.getBody(), "Autonomous Community with name "+community.getName());
+    }
+
+    /**
+     * Check delete community
+     */
+    @Test
+    public void testDeleteCommunity(){
+        AuthonomusCommunity community =  communityRepository.save(new AuthonomusCommunity("Malaga"));
+        ResponseEntity<Object> httpResponse = communityController.deleteAutonomousCommunity(community.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        //Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with community
+        Assertions.assertEquals(httpResponse.getBody(), "Autonomous Community with id "+community.getId()+" has been deleted");
+    }
+
+    /**
+     * Check update community
+     */
+    @Test
+    public void updateCommunity(){
+        AuthonomusCommunity oldCommunity = communityRepository.save(new AuthonomusCommunity("Malaga"));
+        AuthonomusCommunity newCommunity = new AuthonomusCommunity("infolojosCountry");
+        ResponseEntity<Object> httpResponse = communityController.updateCommunity(oldCommunity.getId(), newCommunity);
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        //Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        //Check data
+        assert communityRepository.findAuthonomusCommunityByName(newCommunity.getName()).isPresent();
+        // Check response with community
+        Assertions.assertEquals(httpResponse.getBody(), "Autonomus Community with id "+oldCommunity.getId()+" has been update");
+    }
+
 
     //TEST City
+
+    /*
+    * allCitiesList
+    */
+    @Test
+    public void testAllCitiesLis() {
+        // Check HttpCode
+        ResponseEntity<Object> httpResponse = cityController.allCitiesList();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), cityRepository.findAll());
+    }
+
+    /**
+     * Test allCityListOrder
+     */
+    @Test
+    public void testAllCityListOrder(){
+        //Check HttpCode
+        ResponseEntity<Object> httpResponse = cityController.allCityListOrder();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), cityRepository.cityListAllOrder());
+    }
+
+    /**
+     * test getOneCity
+     */
+    @Test
+    public void testGetOneCity(){
+        City city = cityRepository.save(new City("Aburgo"));
+        ResponseEntity<Object> httpResponse = cityController.getOnCity(city.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check repo find country
+        assertThat(cityRepository.findById(city.getId())).isPresent();
+        // Check response with city
+        Assertions.assertEquals(httpResponse.getBody(), city);
+    }
+
+    /**
+     * test cityAddSimple
+     */
+    @Test
+    public void testCityAddSimple(){
+        City city = new City("Islandia");
+        ResponseEntity<Object> httpResponse = cityController.cityAddSimple(city);
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with city
+        Assertions.assertEquals(httpResponse.getBody(), "City with name "+city.getName()+" has been registered");
+    }
+
+    /**
+     * test deleteCity
+     */
+    @Test
+    public void testDeleteCity(){
+        City city = cityRepository.save(new City("Asburgo"));
+        ResponseEntity<Object> httpResponse = cityController.deleteCity(city.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with city
+        Assertions.assertEquals(httpResponse.getBody(), "City with id "+city.getId()+" has been deleted");
+    }
+
+    /**
+     * test updateCity
+     */
+    @Test
+    public void tesUpdateCity(){
+        City oldCity = cityRepository.save(new City("Asburgo"));
+        City newCity = new City("infolojosCity");
+        ResponseEntity<Object> httpResponse = cityController.updateCity(newCity, oldCity.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        //Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        //Check data
+        assert cityRepository.findCityByName(newCity.getName()).isPresent();
+        // Check response with city
+        Assertions.assertEquals(httpResponse.getBody(), "City with id "+oldCity.getId()+" has been updated");
+    }
+
+
+    //TEST PLAYER
+
+    /*
+     * test all players
+     */
+    @Test
+    public void testAllPlayerLis() {
+        // Check HttpCode
+        ResponseEntity<Object> httpResponse = playerController.allPlayersList();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), playerRepository.findAll());
+    }
+
+    /**
+     * Test allPlayersListOrder
+     */
+    @Test
+    public void testAllPlayerListOrder(){
+        //Check HttpCode
+        ResponseEntity<Object> httpResponse = playerController.allPlayerListOrder();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), playerRepository.allPlayersListOrder());
+    }
+
+    /**
+     * test getOnePlayer
+     */
+    @Test
+    public void testGetOnePlayer(){
+        Player player = playerRepository.findPlayerByName("Alex").orElseThrow(()->new EntityNotFoundException("Alex"));
+        ResponseEntity<Object> httpResponse = playerController.getOnePlayer(player.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check repo find country
+        assertThat(playerRepository.findById(player.getId())).isPresent();
+        // Check response with player
+        Assertions.assertEquals(httpResponse.getBody(), player);
+    }
+    //public Player(String name, String surname, String password, int edad, int clicks, String mail, City city, Role role){
+
+    /**
+     * test playerAddSimple
+     */
+    @Test
+    public void testPlayerAddSimple() throws IOException {
+        Role rol = roleRepository.findRoleByName("player").orElseThrow(()->new EntityNotFoundException("player"));
+        Player player = new Player("Raul","Lojo","pestillo01",21,22,
+                "raul@raul.com");
+        player.setRole(rol);
+
+        ResponseEntity<Object> httpResponse = playerController.playerAddSimple(player);
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with player
+        Assertions.assertEquals(httpResponse.getBody(), "Player with name " + player.getName() + " has been registered ");
+    }
+
+    /**
+     * Check update Player with
+     * with this method the image is also updated
+     * but I decided to separate it into different requests
+     */
+    @Test
+    public void testPlayerUpdate() throws IOException {
+        Player oldPlayer = playerRepository.findPlayerByName("Raul").orElseThrow(()->new EntityNotFoundException("Raul"));
+        Player newPlayer = new Player("Benito","Bendito","pestillo01",34,23,"raul@rl.es");
+        ResponseEntity<Object> httpResponse = playerController.updatePlayer(newPlayer, oldPlayer.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with player
+        Assertions.assertEquals(httpResponse.getBody(), "Player with id " + oldPlayer.getId() + " has been updated");
+    }
+
+    /**
+     * test deletePlayer
+     */
+    @Test
+    public void testDeletePlayer(){
+        Optional<Player> player = playerRepository.findPlayerByName("Benito");
+        assertThat(player).isPresent();
+        ResponseEntity<Object> httpResponse = playerController.deletePlayer(player.get().getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response with city
+        Assertions.assertEquals(httpResponse.getBody(), "Player with id "+player.get().getId()+" has been deleted");
+    }
+
+
+
+
+
+
 
     /**
      * Check City Controller context
