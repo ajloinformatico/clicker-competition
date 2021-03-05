@@ -2,10 +2,7 @@ package es.lojo.clickercompetition.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import es.lojo.clickercompetition.demo.utilities.StringManagement;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -33,6 +30,7 @@ public class City {
 
     // One to Many -> Player
     @JsonBackReference
+    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     Set<Player> fromCity = new HashSet<>();

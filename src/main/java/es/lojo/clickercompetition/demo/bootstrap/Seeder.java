@@ -77,9 +77,9 @@ public class Seeder implements CommandLineRunner {
 
 
         //Roles
-        Role player = roleRepository.save(new Role("player"));
-        Role coach = roleRepository.save(new Role("coach"));
-        Role president = roleRepository.save(new Role("president"));
+        Role player = roleRepository.save(new Role("ROLE_player"));
+        Role coach = roleRepository.save(new Role("ROLE_coach"));
+        Role president = roleRepository.save(new Role("ROLE_president"));
 
 
         //Player

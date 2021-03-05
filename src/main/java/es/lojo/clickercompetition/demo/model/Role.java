@@ -3,6 +3,7 @@ package es.lojo.clickercompetition.demo.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Role implements GrantedAuthority {
 
     // One to Many -> Player
     @JsonBackReference
+    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     Set<Player> players = new HashSet<>();

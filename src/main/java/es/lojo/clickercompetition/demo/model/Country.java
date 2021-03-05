@@ -2,10 +2,7 @@ package es.lojo.clickercompetition.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import es.lojo.clickercompetition.demo.utilities.StringManagement;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -27,6 +24,7 @@ public class Country {
 
     @JsonBackReference //Its it is necessary for the Json response to return in correct format
     @EqualsAndHashCode.Exclude //remove authorization from equals to avoid errors
+    @ToString.Exclude
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     Set<AuthonomusCommunity> fromCountry = new HashSet<>();
 

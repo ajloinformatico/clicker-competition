@@ -2,10 +2,7 @@ package es.lojo.clickercompetition.demo.model;
 
 
 import es.lojo.clickercompetition.demo.utilities.StringManagement;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashSet;
@@ -52,6 +49,7 @@ public class Player {
 
     //Many to many -> Team
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude //Json to large
     @ManyToMany(mappedBy = "players") //tiene que tener mapped by del otro
             Set<Team> teams = new HashSet<>();
 
