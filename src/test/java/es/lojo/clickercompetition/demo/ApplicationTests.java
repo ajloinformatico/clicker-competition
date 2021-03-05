@@ -442,6 +442,7 @@ class ApplicationTests {
         Assertions.assertNotNull(httpResponse.getBody());
         // Check response with player
         Assertions.assertEquals(httpResponse.getBody(), "Player with name " + player.getName() + " has been registered ");
+        playerRepository.delete(playerRepository.findPlayerByName(player.getName()).get());
     }
 
     /**
@@ -451,15 +452,16 @@ class ApplicationTests {
      */
     @Test
     public void testPlayerUpdate() throws IOException {
-        Player oldPlayer = playerRepository.findPlayerByName("Raul").orElseThrow(()->new EntityNotFoundException("Raul"));
-        Player newPlayer = new Player("Benito","Bendito","pestillo01",34,23,"raul@rl.es");
-        ResponseEntity<Object> httpResponse = playerController.updatePlayer(newPlayer, oldPlayer.getId());
+        Optional<Player> oldPlayer = playerRepository.findPlayerByName("Juan");
+        assertThat(oldPlayer).isPresent();
+        Player newPlayer = new Player("Guillermo","Barroso","pestillo01",34,23,"juan@juan.es");
+        ResponseEntity<Object> httpResponse = playerController.updatePlayer(newPlayer, oldPlayer.get().getId());
         //Check HttpCode
         Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
         // Check response body is not null
         Assertions.assertNotNull(httpResponse.getBody());
         // Check response with player
-        Assertions.assertEquals(httpResponse.getBody(), "Player with id " + oldPlayer.getId() + " has been updated");
+        Assertions.assertEquals(httpResponse.getBody(), "Player with id " + oldPlayer.get().getId() + " has been updated");
     }
 
     /**
@@ -467,15 +469,48 @@ class ApplicationTests {
      */
     @Test
     public void testDeletePlayer(){
-        Optional<Player> player = playerRepository.findPlayerByNameAndSurname("Benito", "Bendito");
-        assertThat(player).isPresent();
-        ResponseEntity<Object> httpResponse = playerController.deletePlayer(player.get().getId());
+        Player player = playerRepository.save(new Player("Raul", "Martínez", "pestillo01", 34, 0, "raul@raul.es"));
+        ResponseEntity<Object> httpResponse = playerController.deletePlayer(player.getId());
         //Check HttpCode
         Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
         // Check response body is not null
         Assertions.assertNotNull(httpResponse.getBody());
         // Check response with city
-        Assertions.assertEquals(httpResponse.getBody(), "Player with id "+player.get().getId()+" has been deleted");
+        Assertions.assertEquals(httpResponse.getBody(), "Player with id "+player.getId()+" has been deleted");
+    }
+
+    /**
+     * Test update clicks
+     */
+    @Test
+    public void testUpdateClicks() throws IOException {
+        Player player = playerRepository.save(new Player("Benito", "Bendito", "pestillo01", 34, 0, "benito@benito.es"));
+        //Check player has not clicks
+        assertThat(player.getClicks()).isEqualTo(0);
+        ResponseEntity<Object> httpResponse = playerController.UpdateClicks(player.getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        //Check cliks updated
+        Optional<Player> playerUpdated = playerRepository.findById(player.getId());
+        assertThat(playerUpdated).isPresent();
+        assertThat(playerUpdated.get().getClicks()).isEqualTo(30);
+
+        // Check response with city
+        Assertions.assertEquals(httpResponse.getBody(), player.getId()+" - "+playerUpdated.get().getClicks());
+    }
+
+    /**
+     * Test updateCity
+     */
+    @Test
+    public void testUpdatePlayerCity() {
+        Optional<Player> player = playerRepository.findPlayerByName("Benito");
+        assertThat(player).isPresent();
+        Optional<City> city = cityRepository.findCityByName("El puerto");
+        assertThat(player).isPresent();
+
     }
 
 
