@@ -136,15 +136,26 @@ _Once you carry out the previous steps explained in the following points, you wi
     Copy token and check other controllers
 ```
 ### classifications by clicks
-TODO: CONTINUE 
-
-
+* Sorted by country
+![CLICKS BY COUNTRY](doc/img/orderbyclicks.png)
+* Sorted by Community
+![CLICKS BY COMMUNITIES](doc/img/communityOrderedClicks.png)
+* Sorted by Cities
+![CLICKS BY CITIES](doc/img/citiesOrderedClicks.png)
+* Sorted by Players
+![CLICKS BY PLAYERS](doc/img/playersorderbyclicks.png)
+*Sorted by Teams
+![CLICKS BU TEAMS](doc/img/teamsClicksOrder.png)
+* And more like
+    * update ***team or player avatar***
+    * update ***city or player*** of a team
+    * amd more
 ---
 
 
 ## Deplyment in comming 🚀 📦
 
-_Right now im workin in another projects but i will buld .war with the aplication._ 🤓
+_Right now im working in another projects but I will finish a client for this project._ 🤓
 
 
 ## Contributing 🖇️
@@ -165,7 +176,7 @@ Im open source. Just ❤️ GitHub.
 
 _This web aplication has been developed by:_
 
-* **Antonio José Lojo Ojeda** - *Trabajo Inicial* - [ajloinformatico](https://github.com/ajloinformatico).
+* **Antonio José Lojo Ojeda** -  [ajloinformatico](https://github.com/ajloinformatico).
 
 
 ## License 📄
