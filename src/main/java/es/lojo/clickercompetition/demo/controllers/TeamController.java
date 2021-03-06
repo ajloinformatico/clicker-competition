@@ -34,13 +34,6 @@ public class TeamController {
     @Autowired
     private ImageServices imageServices;
 
-
-    // TODO    TeamUtilityService
-    //        team.setCapitalizedNames();
-    //        team.setDefaulDate();
-    //        team.updateCliks();
-    // TODO or method in User and Team if I have time to finish!!
-
     /**
      * list all teams
      * @return {ResponseEntity}

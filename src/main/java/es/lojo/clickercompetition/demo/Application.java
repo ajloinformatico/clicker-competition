@@ -39,7 +39,7 @@ public class Application {
                     .authorizeRequests()
                         .antMatchers("/login/**").permitAll()
                         .antMatchers("/rol/**").authenticated()
-                        .antMatchers("/players/**").authenticated()
+                        .antMatchers("/players/**").permitAll()
                         .antMatchers("/teams/**").authenticated()
                         .antMatchers("/cities/**").authenticated()
                         .antMatchers("/communities/**").authenticated()

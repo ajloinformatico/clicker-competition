@@ -1,0 +1,1512 @@
+_type: export
+__export_format: 4
+__export_date: 2021-03-06T10:16:41.819Z
+__export_source: insomnia.desktop.app:v2021.1.0
+resources:
+  - _id: req_e039ba8e3c3f478199caf6ae3974b42d
+    parentId: fld_22b20f08ec83483caad5da2e4377815e
+    modified: 1614881012669
+    created: 1614706809713
+    url: http://localhost:8080/rol/28
+    name: getPlayerRol
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJlbGVuYSIsImF1dGhvcml0aWVzIjp7ImlkIjoyNywibmFtZSI6InByZXNpZGVudCIsImF1dGhvcml0eSI6InByZXNpZGVudCJ9LCJpYXQiOjE2MTQ4ODA4NDAsImV4cCI6MTYxNDg4Njg0MH0.E_urDpNu2IkXpjxxLUaOm-OunbajTbIAuByBaXLyz1xtNaCzap_J5dF4dcqgYAUsNlafrDHfjnY7Yl6zLriG-g
+    metaSortKey: -1614706809713
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_22b20f08ec83483caad5da2e4377815e
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1614706800252
+    created: 1614706800252
+    name: Rol
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1614706800252
+    _type: request_group
+  - _id: wrk_e8684813bc9d4d4c97c443a92b242737
+    parentId: null
+    modified: 1613672223631
+    created: 1613672223631
+    name: clicker-competition
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_fd46c4f7f1964d1aab4b7b8ddb245fce
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1614514301107
+    created: 1614514195551
+    url: ""
+    name: addPlayerToTeam
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f82f3a24248443a8b5e57131f69822b8
+    authentication: {}
+    metaSortKey: -1614510736912
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_daef9299b2ee4bd5a22ef170bedb45ff
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614604609389
+    created: 1614604587516
+    url: http://localhost:8080/team/avatar/37
+    name: deleteTeamAvatar
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614604587516
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1614510736862
+    created: 1614510736862
+    name: Team
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1614510736862
+    _type: request_group
+  - _id: req_959590775ae748f2aebd69069fc178b2
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614604571258
+    created: 1614604450556
+    url: http://localhost:8080/team/avatar
+    name: setTeamAvatar
+    description: ""
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - name: id
+          value: "37"
+          description: ""
+          id: pair_255005da116f40ed998bec43cb4f7eb2
+        - name: file
+          value: ""
+          description: ""
+          id: pair_268d8f86b6c748d894fa1fff4fd32c15
+          type: file
+          fileName: /Users/antoniojoselojoojeda/Documents/git/infolojo.es/images/SurfBetter-min.png
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+        id: pair_a0f560b7d01f4743acc2228c0367b960
+    authentication: {}
+    metaSortKey: -1614604450556
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b29ea2df972e4ec19e8216f40f596e3b
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614948605225
+    created: 1614604269573
+    url: http://localhost:8080/team/avatar/37
+    name: getTeamAvatar
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJqdWFuIiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI1LCJuYW1lIjoiUk9MRV9wbGF5ZXIiLCJhdXRob3JpdHkiOiJST0xFX3BsYXllciJ9LCJpYXQiOjE2MTQ5NDgzNDgsImV4cCI6MTYxNDk1NDM0OH0.EmOlaaYi86P_AfM2Pm2vkSJBprtw9FYbMM2iiygt6r0vMtsViJjVf9-eAHGGXmQzSXIs64xlYQp-EZOWGsDizQ
+    metaSortKey: -1614604269573
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7719f16befe04f309c67002ec57658a1
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614600782912
+    created: 1614600697804
+    url: http://localhost:8080/team/35
+    name: updateTeam
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"Fire"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_cea99d3e563f4e7bb1d5fe8000875a95
+    authentication: {}
+    metaSortKey: -1614600697804
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dd60290c276a426e8441bab2878efcf0
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614600661588
+    created: 1614600613295
+    url: http://localhost:8080/team/34
+    name: deleteTeam
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614600613295
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_50a474b2219544c4a4fb820c57d7adf4
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614532058365
+    created: 1614532039501
+    url: http://localhost:8080/team/players
+    name: getAllTeamsWithPlayers
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614532039501
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_20391779d0a24893b8802db9cab443ab
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614532010574
+    created: 1614530553885
+    url: http://localhost:8080/team/players/31
+    name: getOneTeamWithPlayers
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614530553885
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2fb5f4e0d81f476388cd7ad26b4e9c1b
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614515941498
+    created: 1614515923239
+    url: http://localhost:8080/teams/players
+    name: allTeamsWithPlayers
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614515923239
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_03a44cfd762849cf97abf078f696f2dc
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614514900304
+    created: 1614514677707
+    url: http://localhost:8080/team/player/27
+    name: deletePlayerFromTeam
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Blue Dragon Click master"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_5d2b2b5f924b485b8846c23d07b9995e
+    authentication: {}
+    metaSortKey: -1614514677707
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ffa2fbadf8ce4c30b4e161e020bd9bc7
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614514601679
+    created: 1614514322989
+    url: http://localhost:8080/team/player/35
+    name: addPlayerToTeam
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-2
+         {
+            "name": "ortega",
+            "surname": "ortegans",
+            "password": "pestillo",
+            "edad": 34,
+        	 	"clicks": 0,
+        	  "mail": "osdrtasda@ortegans.es"
+         }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c8e93788c153415495cc1e6c6b31594a
+    authentication: {}
+    metaSortKey: -1614514322989
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_59b5ed3dc5564faea498322a2678d2d1
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614514260785
+    created: 1614513012494
+    url: http://localhost:8080/team
+    name: addTeamWithoutPlayers
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"Dragones"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_e5e0816f299b4d85b06353bfe4eb9fff
+    authentication: {}
+    metaSortKey: -1614513012494
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7d3f8dc2bc3145e59a9b33cdb28b4b03
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614707095429
+    created: 1614511036348
+    url: http://localhost:8080/teams/clicks
+    name: getTeamsOrdered
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJkaWVnbyIsImF1dGhvcml0aWVzIjp7ImlkIjoyNiwibmFtZSI6ImNvYWNoIiwiYXV0aG9yaXR5IjoiY29hY2gifSwiaWF0IjoxNjE0NzA3MDQwLCJleHAiOjE2MTQ3MTMwNDB9.65okxDoMxkdxK_ZiEeeNFzJ7lngbCYbDJY3P-qa_pxuWzAc4pvrT8uWOfsNxlXg0J9bQxd6S6OrDLGKvGddrZg
+    metaSortKey: -1614511036348
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d97d9f2573d749d89f6b5f8fe4d08b3f
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614880863238
+    created: 1614510981010
+    url: http://localhost:8080/team/31
+    name: getOneTeam
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJlbGVuYSIsImF1dGhvcml0aWVzIjp7ImlkIjoyNywibmFtZSI6InByZXNpZGVudCIsImF1dGhvcml0eSI6InByZXNpZGVudCJ9LCJpYXQiOjE2MTQ4ODA4NDAsImV4cCI6MTYxNDg4Njg0MH0.E_urDpNu2IkXpjxxLUaOm-OunbajTbIAuByBaXLyz1xtNaCzap_J5dF4dcqgYAUsNlafrDHfjnY7Yl6zLriG-g
+    metaSortKey: -1614510981010
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0eddf61b891d4613b20ed13ba562e45e
+    parentId: fld_58a98d3fb26c4788a7c237db5a62f4b6
+    modified: 1614707076291
+    created: 1614510786142
+    url: http://localhost:8080/teams
+    name: getAllTeams
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJkaWVnbyIsImF1dGhvcml0aWVzIjp7ImlkIjoyNiwibmFtZSI6ImNvYWNoIiwiYXV0aG9yaXR5IjoiY29hY2gifSwiaWF0IjoxNjE0NzA3MDQwLCJleHAiOjE2MTQ3MTMwNDB9.65okxDoMxkdxK_ZiEeeNFzJ7lngbCYbDJY3P-qa_pxuWzAc4pvrT8uWOfsNxlXg0J9bQxd6S6OrDLGKvGddrZg
+    metaSortKey: -1614510786142
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8336b15e668a44aa92e1fd56ccf1667e
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948662647
+    created: 1614539510196
+    url: http://localhost:8080/login
+    name: login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - name: name
+          value: diego
+          description: ""
+          id: pair_ed26c9ac544f47e6a989d6c23a4dfea5
+        - name: password
+          value: pestillo01
+          description: ""
+          id: pair_1e4537e6afad45e79956de102b5c6b6e
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/x-www-form-urlencoded
+        id: pair_8332cc24bb4243f0b4bca6d511d4e610
+    authentication: {}
+    metaSortKey: -1614539510196
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_609fd847c81749a9b844197389934946
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1613851749740
+    created: 1613851749740
+    name: Player
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1613851749740
+    _type: request_group
+  - _id: req_c3d7e295faf0435eb869cfec4af68437
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614949113681
+    created: 1614453643403
+    url: http://localhost:8080/player/clicks/28
+    name: updateClicks
+    description: ""
+    method: PUT
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJkaWVnbyIsImF1dGhvcml0aWVzIjp7ImlkIjoyNiwibmFtZSI6IlJPTEVfY29hY2giLCJhdXRob3JpdHkiOiJST0xFX2NvYWNoIn0sImlhdCI6MTYxNDk0OTA5OCwiZXhwIjoxNjE0OTU1MDk4fQ._tgA5d3Dawcj2XGxlMvpcARxN_gqSL09votnD-fgJ1iUcst49TGS_hKziG3tDMX40Akjqc08ohRtrgi5F445Nw
+    metaSortKey: -1614453643403
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7757928fa2584716829e492d77b5a02f
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948555834
+    created: 1614205148375
+    url: http://localhost:8080/player/29
+    name: GetOnePlayer
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      prefix: ""
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJqdWFuIiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI1LCJuYW1lIjoiUk9MRV9wbGF5ZXIiLCJhdXRob3JpdHkiOiJST0xFX3BsYXllciJ9LCJpYXQiOjE2MTQ5NDgzNDgsImV4cCI6MTYxNDk1NDM0OH0.EmOlaaYi86P_AfM2Pm2vkSJBprtw9FYbMM2iiygt6r0vMtsViJjVf9-eAHGGXmQzSXIs64xlYQp-EZOWGsDizQ
+    metaSortKey: -1614205148376
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ef210f3cdfba43cc8bc29cc516c94ea5
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948367361
+    created: 1613946977220
+    url: http://localhost:8080/player/city/29
+    name: getPlayerCity
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJqdWFuIiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI1LCJuYW1lIjoiUk9MRV9wbGF5ZXIiLCJhdXRob3JpdHkiOiJST0xFX3BsYXllciJ9LCJpYXQiOjE2MTQ5NDgzNDgsImV4cCI6MTYxNDk1NDM0OH0.EmOlaaYi86P_AfM2Pm2vkSJBprtw9FYbMM2iiygt6r0vMtsViJjVf9-eAHGGXmQzSXIs64xlYQp-EZOWGsDizQ
+    metaSortKey: -1613946977220
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8c61b2c0fae045038a41cabd8be12f1b
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614536809364
+    created: 1613946140465
+    url: http://localhost:8080/player/avatar/29
+    name: deletePlayerAvatar
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613946140465
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_94ed3ac8d6014637b1f351c9a187e573
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614703285726
+    created: 1613946122865
+    url: http://localhost:8080/player/avatar/29
+    name: getPlayerAvatar
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJKdWFuIiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI1LCJuYW1lIjoicGxheWVyIiwiYXV0aG9yaXR5IjoicGxheWVyIn0sImlhdCI6MTYxNDcwMjg4OCwiZXhwIjoxNjE0NzA4ODg4fQ.UzDJIiRLjb3FvC7OM-UJ0v8yG-pM0dgod2HFnB6R99HgCpLGFt2WmIPmMcJhXwdniYl6CAmEAVpRPL43SmjVfQ
+    metaSortKey: -1613946122865
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_81d1a8aa28c74c8480ac0810e52c7856
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614536794864
+    created: 1613946110174
+    url: http://localhost:8080/player/avatar
+    name: setPlayerAvatar
+    description: ""
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - name: id
+          value: "29"
+          description: ""
+          id: pair_833c21c12a5f4c939ba76c63f00faf84
+        - name: file
+          value: ""
+          description: ""
+          id: pair_0eb49ea50f994dd2ad8e228f4210478d
+          type: file
+          fileName: /Users/antoniojoselojoojeda/Documents/git/infolojo.es/images/infolojo.ico
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+        id: pair_b130fceacf734c56bab1b6803245bb31
+    authentication: {}
+    metaSortKey: -1613946110174
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9d1b4dc54ddc4f23aca9e553a5af2e70
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614536780786
+    created: 1613940585659
+    url: http://localhost:8080/player/city/29
+    name: updateCity
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "El Puerto"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_1d6be03531824730a6e164beb6dac47f
+    authentication: {}
+    metaSortKey: -1613940585659
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d779d62267ce4433b2e6f67f3d63ef90
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948545285
+    created: 1613913386614
+    url: http://localhost:8080/player/29
+    name: updatePlayer
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "name": "ortega",
+            "surname": "ortegans",
+            "password": "pestillo",
+            "edad": 34,
+        	 	"clicks": 0,
+        	  "mail": "osdrtasda@ortegans.es"
+         }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_129aa70b80be4aae8c705cad1080df29
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJqdWFuIiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI1LCJuYW1lIjoiUk9MRV9wbGF5ZXIiLCJhdXRob3JpdHkiOiJST0xFX3BsYXllciJ9LCJpYXQiOjE2MTQ5NDgzNDgsImV4cCI6MTYxNDk1NDM0OH0.EmOlaaYi86P_AfM2Pm2vkSJBprtw9FYbMM2iiygt6r0vMtsViJjVf9-eAHGGXmQzSXIs64xlYQp-EZOWGsDizQ
+    metaSortKey: -1613913386614
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_34e10174b44c43cca79f243133ca1ce7
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1613922788720
+    created: 1613912621274
+    url: http://localhost:8080/player/28
+    name: deletePlayer
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613912621274
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_20c592d591984a669d5a4a74e21711f4
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948788224
+    created: 1613905877551
+    url: http://localhost:8080/player/city/15
+    name: playerAddWithCity
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-2
+         {
+            "name": "cristian",
+            "surname": "sdos",
+            "password": "pestillo",
+            "edad": 14,
+        	 	"clicks": 0,
+        	  "mail": "cris@woki.es",
+        	 	"role": {
+              "name": "ROLE_coach"
+            }
+         }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4d9d04cbaa074dfe805cc96cf8d616f0
+    authentication: {}
+    metaSortKey: -1613905877551
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5a421b15f5ac46618fa5f6c8058a1046
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948797169
+    created: 1613861910850
+    url: http://localhost:8080/player
+    name: playerAddWithouthCity
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-2
+         {
+            "name": "ortega",
+            "surname": "ortegans",
+            "password": "pestillo",
+            "edad": 34,
+        	 	"clicks": 0,
+        	  "mail": "osdrtasda@ortegans.es",
+        	 	"role": {
+              "name": "ROLE_player"
+            }
+         }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_7a0b651ee26f42fe8e29324fe1be63f9
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJkaWVnbyIsImF1dGhvcml0aWVzIjp7ImlkIjoyNiwibmFtZSI6ImNvYWNoIiwiYXV0aG9yaXR5IjoiY29hY2gifSwiaWF0IjoxNjE0NzA3MDQwLCJleHAiOjE2MTQ3MTMwNDB9.65okxDoMxkdxK_ZiEeeNFzJ7lngbCYbDJY3P-qa_pxuWzAc4pvrT8uWOfsNxlXg0J9bQxd6S6OrDLGKvGddrZg
+    metaSortKey: -1613861910850
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ba70d8b84e424cfb9a86735bb94ef396
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614470510083
+    created: 1613851860954
+    url: http://localhost:8080/players/clicks
+    name: allPlayersListOrder
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613851860954
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_da7992f0fd8c4ef4a92f77f7a1e660ca
+    parentId: fld_609fd847c81749a9b844197389934946
+    modified: 1614948683588
+    created: 1613851769438
+    url: http://localhost:8080/players/
+    name: allPlayersList
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJqdWFuIiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI1LCJuYW1lIjoiUk9MRV9wbGF5ZXIiLCJhdXRob3JpdHkiOiJST0xFX3BsYXllciJ9LCJpYXQiOjE2MTQ5NDgzNDgsImV4cCI6MTYxNDk1NDM0OH0.EmOlaaYi86P_AfM2Pm2vkSJBprtw9FYbMM2iiygt6r0vMtsViJjVf9-eAHGGXmQzSXIs64xlYQp-EZOWGsDizQ
+    metaSortKey: -1613851769438
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e31e964bca0e4206a580305c59cf97d7
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614635168907
+    created: 1614634953867
+    url: http://localhost:8080/city/AutonomousCommunity/15
+    name: deleteCityAutonomousCommunity
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614634953867
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_da0115225aff4e5a981b398ce60d3b32
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1613691052062
+    created: 1613691052062
+    name: City
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1613691052062
+    _type: request_group
+  - _id: req_9f2958914c7642178e2c291da48822a6
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614880916653
+    created: 1614633977174
+    url: http://localhost:8080/city/16
+    name: getOneCity
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJlbGVuYSIsImF1dGhvcml0aWVzIjp7ImlkIjoyNywibmFtZSI6InByZXNpZGVudCIsImF1dGhvcml0eSI6InByZXNpZGVudCJ9LCJpYXQiOjE2MTQ4ODA4NDAsImV4cCI6MTYxNDg4Njg0MH0.E_urDpNu2IkXpjxxLUaOm-OunbajTbIAuByBaXLyz1xtNaCzap_J5dF4dcqgYAUsNlafrDHfjnY7Yl6zLriG-g
+    metaSortKey: -1614633977174
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4cd6c5bb417343fa85ae728116524f19
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614635137614
+    created: 1614470268278
+    url: http://localhost:8080/city/AutonomousCommunity/15
+    name: getAutonomousComunityCity
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614470268278
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f899eb6d2306481d874600b83c4c8ce0
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614464878026
+    created: 1614461746614
+    url: http://localhost:8080/city/AutonomousCommunity/15
+    name: updateCityCA
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Madrid"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0304e9c444d146359288b71a6bf1d4a3
+    authentication: {}
+    metaSortKey: -1614461746615
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cee596a3a5fb4aadb9da73837e7ce49d
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614461509533
+    created: 1614461463581
+    url: http://localhost:8080/city/19
+    name: updateCity
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Infolojos City"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_710a47abd6a14977a1accde191b049b4
+    authentication: {}
+    metaSortKey: -1614461463581
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1949bfe16b514ddbb832862cd21f3d48
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614634083129
+    created: 1614460712020
+    url: http://localhost:8080/city/24
+    name: deleteCity
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614460712020
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b757f9cb1ecf4004896a7eb3e4679a73
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614460612882
+    created: 1614460404662
+    url: http://localhost:8080/city/9
+    name: addWithCommunity
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Roma"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_da5aff3301e04d9e8dbbb440b1474084
+    authentication: {}
+    metaSortKey: -1614460404662
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_28a16956d0ee481f857cc1c374fb5029
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614100148462
+    created: 1614100043871
+    url: http://localhost:8080/city
+    name: addCityWithoutAc
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Luxemburgo"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_87eda20a57224e8d804d5551e58f2adc
+    authentication: {}
+    metaSortKey: -1614100043872
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_093b3bafee28489b96b781c982c482e7
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614470472643
+    created: 1613691147114
+    url: http://localhost:8080/cities/clicks
+    name: allCityListOrder
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613691147114
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3da82e9d3f6243abaf4b925d3b410280
+    parentId: fld_da0115225aff4e5a981b398ce60d3b32
+    modified: 1614470239128
+    created: 1613691071157
+    url: http://localhost:8080/cities
+    name: allCitiesList
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613691071157
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4b17f53f3c154d458ae96a4d01ff14f0
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614637006740
+    created: 1614636992379
+    url: http://localhost:8080/community/country/5
+    name: DeleteCountryAtonomousCommunity
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614636992379
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7fc6d37b5a97413fbeee981407c1a83a
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1613686065140
+    created: 1613686065140
+    name: AuthonomusCommunity
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1613686065141
+    _type: request_group
+  - _id: req_506dd16982a049de8b406685e67d5dba
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614636933993
+    created: 1614636883899
+    url: http://localhost:8080/community/country/5
+    name: getCityFromAutonomousCommunity
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614636883976
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1af36359c3094894b99dfdf765b54317
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614636783426
+    created: 1614636671265
+    url: http://localhost:8080/community/country/5
+    name: updateCommunityCountry
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Italy"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_053c0a941d4242e19f3de12afb149821
+    authentication: {}
+    metaSortKey: -1614636671265
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1cbf2293eea54a54be79baa233c8a55d
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614636547080
+    created: 1614636464799
+    url: http://localhost:8080/community/7
+    name: updateCommunity/
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "amazing"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_803494c7a9ab4d5da8bcdb4325fae23b
+    authentication: {}
+    metaSortKey: -1614636464799
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0fd9de908ea94bd08dcc7a81c1a253e3
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614636383331
+    created: 1614636320129
+    url: http://localhost:8080/community/38
+    name: deleteAutonomousCommunity
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614636320129
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0c825f5df29b4d1dbf8ada425b56b169
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614636266689
+    created: 1614636094825
+    url: http://localhost:8080/community/1
+    name: addWithCountry
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "community in spain"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_e4c4d086a33b444fb9c854bd850153b4
+    authentication: {}
+    metaSortKey: -1614636094825
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_26406a6665184eeaa7936583bb17a9ec
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614636030170
+    created: 1614635965498
+    url: http://localhost:8080/community
+    name: communityAddSimple
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "la comunidad indepe de mi casa"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4e1d15d9a50e4751b9a7cc592298238d
+    authentication: {}
+    metaSortKey: -1614635965498
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8cab455f49104fd5966bc08fd73ddeae
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614635875974
+    created: 1613687750591
+    url: http://localhost:8080/communities/clicks
+    name: " allCommunitiesListOrder"
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613687750650
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6d8a5562130d4790a3255be6fb7050cc
+    parentId: fld_7fc6d37b5a97413fbeee981407c1a83a
+    modified: 1614705776795
+    created: 1613686097554
+    url: http://localhost:8080/communities
+    name: allCommunitiesList
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613686097628
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_819cb70e893342ba9bdc2ad9639835f8
+    parentId: fld_b179886a892744f48f2e3c4b987ecfec
+    modified: 1614638250207
+    created: 1614638117058
+    url: http://localhost:8080/country/2
+    name: updateAutonomousCommunity
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Mexico"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_71ba9b0381364d829ca67b3c1a58e7a5
+    authentication: {}
+    metaSortKey: -1614638117058
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_b179886a892744f48f2e3c4b987ecfec
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1613672338583
+    created: 1613672338583
+    name: Country
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1613672338583
+    _type: request_group
+  - _id: req_fa12753e615b4e4f80ad64e966c25dd9
+    parentId: fld_b179886a892744f48f2e3c4b987ecfec
+    modified: 1614638014228
+    created: 1614637978690
+    url: http://localhost:8080/country/38
+    name: deleteCountry
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1614637978690
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7bc611925b7c44c6ba597595decc8eff
+    parentId: fld_b179886a892744f48f2e3c4b987ecfec
+    modified: 1614637934068
+    created: 1614637867375
+    url: http://localhost:8080/country
+    name: addCountry
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"france"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_8a4adc75f6284c0b9c9219fcdf04d23b
+    authentication: {}
+    metaSortKey: -1614637867375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f1f96f0dce55400484aea6f1adc8d408
+    parentId: fld_b179886a892744f48f2e3c4b987ecfec
+    modified: 1614880735294
+    created: 1614637784556
+    url: http://localhost:8080/country/2
+    name: getOneClick
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJhbGV4IiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI3LCJuYW1lIjoicHJlc2lkZW50IiwiYXV0aG9yaXR5IjoicHJlc2lkZW50In0sImlhdCI6MTYxNDg4MDY0OSwiZXhwIjoxNjE0ODg2NjQ5fQ.PnFWZNc_yPkXOj9uYsHZyBahkAZ-jk5mnMKVWFHt2gtHr-b_HRMxsi0CYBFJx8KcFU5hNjhAD0CXUhMm1wTFiQ
+    metaSortKey: -1614637784556
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_641b4845ee6d441490752f9ca5403b3e
+    parentId: fld_b179886a892744f48f2e3c4b987ecfec
+    modified: 1614637746222
+    created: 1613684796702
+    url: http://localhost:8080/countries/clicks
+    name: allCountryListOrder
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1613684796765
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e610fb0514b14c9fb0f774d50bd1dee0
+    parentId: fld_b179886a892744f48f2e3c4b987ecfec
+    modified: 1614880668739
+    created: 1613672354149
+    url: http://localhost:8080/countries
+    name: allCountryList
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJBbGJlcnRJRVMiLCJzdWIiOiJhbGV4IiwiYXV0aG9yaXRpZXMiOnsiaWQiOjI3LCJuYW1lIjoicHJlc2lkZW50IiwiYXV0aG9yaXR5IjoicHJlc2lkZW50In0sImlhdCI6MTYxNDg4MDY0OSwiZXhwIjoxNjE0ODg2NjQ5fQ.PnFWZNc_yPkXOj9uYsHZyBahkAZ-jk5mnMKVWFHt2gtHr-b_HRMxsi0CYBFJx8KcFU5hNjhAD0CXUhMm1wTFiQ
+    metaSortKey: -1613672354149
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_9f9a095069fb36f64388a51705df83de5a99f3d8
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1613672223704
+    created: 1613672223704
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1613672223704
+    _type: environment
+  - _id: jar_9f9a095069fb36f64388a51705df83de5a99f3d8
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1614949115257
+    created: 1613672223706
+    name: Default Jar
+    cookies:
+      - key: JSESSIONID
+        value: E74DF532C478C4BFADBBEB65FD5D9C39
+        domain: localhost
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2021-02-18T18:20:29.348Z
+        lastAccessed: 2021-03-05T12:58:35.257Z
+        id: "9556960878773497"
+    _type: cookie_jar
+  - _id: spc_0e4fdb32471d498ea139def9d55e50c1
+    parentId: wrk_e8684813bc9d4d4c97c443a92b242737
+    modified: 1613672223642
+    created: 1613672223642
+    fileName: clicker-competition
+    contents: ""
+    contentType: yaml
+    _type: api_spec

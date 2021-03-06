@@ -1,6 +1,7 @@
 package es.lojo.clickercompetition.demo;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.optional;
 
 import es.lojo.clickercompetition.demo.controllers.*;
 import es.lojo.clickercompetition.demo.model.*;
@@ -283,6 +284,14 @@ class ApplicationTests {
 
     //TEST City
 
+    /**
+     * Check City Controller context
+     */
+    @Test
+    public void CityControllerControllerContexLoad() {
+        assertThat(cityController).isNotNull();
+    }
+
     /*
     * allCitiesList
     */
@@ -379,6 +388,14 @@ class ApplicationTests {
 
     //TEST PLAYER
 
+    /**
+     * Check Player Controller context
+     */
+    @Test
+    public void PlayerControllerControllerContexLoad() {
+        assertThat(playerController).isNotNull();
+    }
+
     /*
      * test all players
      */
@@ -430,7 +447,7 @@ class ApplicationTests {
      */
     @Test
     public void testPlayerAddSimple() throws IOException {
-        Role rol = roleRepository.findRoleByName("player").orElseThrow(()->new EntityNotFoundException("player"));
+        Role rol = roleRepository.findRoleByName("ROLE_player").orElseThrow(()->new EntityNotFoundException("player"));
         Player player = new Player("Raul","Lojo","pestillo01",21,22,
                 "raul@raul.com");
         player.setRole(rol);
@@ -497,7 +514,7 @@ class ApplicationTests {
         assertThat(playerUpdated).isPresent();
         assertThat(playerUpdated.get().getClicks()).isEqualTo(30);
 
-        // Check response with city
+        // Check response with data correct
         Assertions.assertEquals(httpResponse.getBody(), player.getId()+" - "+playerUpdated.get().getClicks());
     }
 
@@ -509,34 +526,37 @@ class ApplicationTests {
         Optional<Player> player = playerRepository.findPlayerByName("Benito");
         assertThat(player).isPresent();
         Optional<City> city = cityRepository.findCityByName("El puerto");
+        assertThat(city).isPresent();
+        ResponseEntity<Object> httpResponse = playerController.updatePlayerCity(city.get(), player.get().getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        //Check city updated
+        Optional<Player> updatedPlayer = playerRepository.findById(player.get().getId());
+        assertThat(updatedPlayer).isPresent();
+        // Check info player body
+        // Check response with data correct
+        Assertions.assertEquals(httpResponse.getBody(), player.get().getName() + " updated with city "
+                + city.get().getName());
+
+    }
+
+    /**
+     * Test player get city
+     */
+    @Test
+    public void testGetPlayercity(){
+        Optional<Player> player = playerRepository.findPlayerByName("Elena");
         assertThat(player).isPresent();
-
+        ResponseEntity<Object> httpResponse = playerController.getPlayerCity(player.get().getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body with
+        Assertions.assertEquals(httpResponse.getBody(), player.get().getCity());
     }
-
-
-
-
-
-
-
-    /**
-     * Check City Controller context
-     */
-    @Test
-    public void CityControllerControllerContexLoad() {
-        assertThat(cityController).isNotNull();
-    }
-
-
-    //TEST Player
-    /**
-     * Check Player Controller context
-     */
-    @Test
-    public void PlayerControllerControllerContexLoad() {
-        assertThat(playerController).isNotNull();
-    }
-
 
     //TEST Team
     /**
@@ -547,31 +567,87 @@ class ApplicationTests {
         assertThat(teamController).isNotNull();
     }
 
-
-    @Test //Test insert a country
-    void testInsertCountry() {
-        //Check class
-        Country country1 = countryRepository.save(new Country("América"));
-        //Check name
-        assert country1.getName().equals("América");
-        //Check repository
-        assert countryRepository.findById(country1.getId()).isPresent();
-    }
-
-    @Test //test get
-    void getCountry() {
-        Optional<Country> optionalCountry1 = countryRepository.findCountryByName("América");
-        //first check if country is present
-        assert optionalCountry1.isPresent();
-        //check get
-        assert optionalCountry1.get().getName().equals("América");
-    }
-
+    /**
+     * test all teams list
+     */
     @Test
-    public void testGetOrderByClicksCountry() throws Exception{
-        //Check repository method
-        ArrayList<Country> countrysOrdered = countryRepository.getOrderByClicksCountry();
-        assert ! countrysOrdered.isEmpty();
+    public void testAllTeamsList(){
+        // Check HttpCode
+        ResponseEntity<Object> httpResponse = teamController.allTeamsList();
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), teamRepository.findAll());
     }
+
+    /**
+     * Test allTeamListOrder()
+     */
+    @Test
+    public void testGetAllTeamsListOrder(){
+        ResponseEntity<Object> httpResponse = teamController.allTeamsListOrder();
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), teamRepository.findAllTeamssOrder());
+
+    }
+
+    /**
+     * Test delete a team
+     */
+    @Test
+    public void deleteTeam(){
+        Optional<Team> oldTeam = teamRepository.findTeamByName("Ortegans cc");
+        assertThat(oldTeam).isPresent();
+        ResponseEntity<Object> httpResponse = teamController.deleteTeam(oldTeam.get().getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), "Team with id "+oldTeam.get().getId() +" has been deleted");
+    }
+
+    /**
+     * Test update a team
+     */
+    @Test
+    public void testUpdateTeam(){
+        Optional<Team> oldTeam = teamRepository.findTeamByName("Real infolojo");
+        //Check old team exists
+        assertThat(oldTeam).isPresent();
+        Team newteam = new Team("Ortegans cc");
+        ResponseEntity<Object> httpResponse = teamController.updateTeam(newteam, oldTeam.get().getId());
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), newteam.getName()+" has been updated");
+
+    }
+
+    /**
+     * Test addNewTeam
+     */
+    @Test
+    public void testAddNewTeam(){
+        Team team = new Team("Real infolojo");
+        ResponseEntity<Object> httpResponse = teamController.teamAddSimple(team);
+        //Check HttpCode
+        Assertions.assertEquals(httpResponse.getStatusCode(), HttpStatus.OK);
+        // Check response body is not null
+        Assertions.assertNotNull(httpResponse.getBody());
+        // Check response body is correct
+        Assertions.assertEquals(httpResponse.getBody(), "Team with name "+team.getName() + " has been registered");
+    }
+
+
+
+
 
 }
