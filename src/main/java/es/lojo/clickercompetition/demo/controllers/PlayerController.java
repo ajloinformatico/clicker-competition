@@ -51,10 +51,6 @@ public class PlayerController {
     @Autowired
     private RoleRepository roleRepository;
 
-
-
-//TODO SOS
-
     /**
      *
      * @param id {Long}: Player id

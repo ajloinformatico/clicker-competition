@@ -28,10 +28,6 @@ public class Application {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
 
-            Role player = new Role("player");
-            Role coach = new Role("coach");
-            Role president = new Role("president");
-
             //entities in plural are allowed to all to see statistics
             //players and coachs can work with player and team and other entities only for president
             http.cors().and().csrf().disable()
